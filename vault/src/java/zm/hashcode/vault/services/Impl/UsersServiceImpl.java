@@ -100,9 +100,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public void updatePassword(String old, String newPassword, String newPassword2) {
-        Users user = new Users();
-        user.setPassword(newPassword2);
+    public void updatePassword(Users user) {
         usersDAO.merge(user);
     }
 

@@ -118,7 +118,7 @@ public class CurrenciesViewPage extends VerticalLayout implements
     }
 
     public void saveNewCurrencyList(Form form) {
-        final String currecyName = form.getField("currecyName").getValue().toString();
+        final String currecyName = form.getField("currencyName").getValue().toString();
         final String currencySymbol = form.getField("currencySymbol").getValue().toString();
         final String currencyCode = form.getField("currencyCode").getValue().toString();
         final String currencyShortCode = form.getField("currencyShortCode").getValue().toString();
@@ -130,7 +130,7 @@ public class CurrenciesViewPage extends VerticalLayout implements
 
         final Long id = Long.parseLong(form.getField("id").getValue().toString());
         final CurrencyList s = data.getCurrencyListService().find(id);
-        final String currecyName = form.getField("currecyName").getValue().toString();
+        final String currecyName = form.getField("currencyName").getValue().toString();
         final String currencySymbol = form.getField("currencySymbol").getValue().toString();
         final String currencyCode = form.getField("currencyCode").getValue().toString();
         final String currencyShortCode = form.getField("currencyShortCode").getValue().toString();

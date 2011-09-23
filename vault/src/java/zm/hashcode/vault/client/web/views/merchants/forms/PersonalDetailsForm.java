@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package zm.hashcode.vault.client.web.views.students.forms;
+package zm.hashcode.vault.client.web.views.merchants.forms;
 
+import zm.hashcode.vault.client.web.views.students.forms.*;
 import com.vaadin.data.Item;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;

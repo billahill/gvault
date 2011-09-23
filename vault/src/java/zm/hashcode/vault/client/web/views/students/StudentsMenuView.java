@@ -9,6 +9,7 @@ package zm.hashcode.vault.client.web.views.students;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import zm.hashcode.vault.client.web.VaultMain;
+import zm.hashcode.vault.client.web.views.students.views.ChangePasswordViewPage;
 import zm.hashcode.vault.client.web.views.students.views.PersonalDetailsViewPage;
 
 /**
@@ -26,7 +27,10 @@ public class StudentsMenuView extends VerticalLayout {
         VerticalLayout personalDetailsTab = new VerticalLayout();
         personalDetailsTab.setMargin(true);
         personalDetailsTab.addComponent(new PersonalDetailsViewPage(main));
-
+        
+         VerticalLayout changePasswordTab = new VerticalLayout();
+        changePasswordTab.setMargin(true);
+        changePasswordTab.addComponent(new ChangePasswordViewPage(main));
        
 
         tab = new TabSheet();
@@ -35,11 +39,14 @@ public class StudentsMenuView extends VerticalLayout {
 
         
         tab.addTab(personalDetailsTab, "Personal Details", null);
+        tab.addTab(changePasswordTab, "Change Passwod", null);
       
         
         
         if (selectedTab.equals("PERSONALDETAILS")) {
             tab.setSelectedTab(personalDetailsTab);
+        }else  if (selectedTab.equals("CHANGEPASSWORD")) {
+            tab.setSelectedTab(changePasswordTab);
         }
         addComponent(tab);
     }

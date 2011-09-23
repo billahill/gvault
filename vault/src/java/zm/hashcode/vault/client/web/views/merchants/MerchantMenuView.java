@@ -21,6 +21,7 @@ import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.admin.views.StatusViewPage;
 import zm.hashcode.vault.client.web.views.merchants.views.AccountDetailsWindow;
 import zm.hashcode.vault.client.web.views.merchants.views.AccountLedgerViewPage;
+import zm.hashcode.vault.client.web.views.merchants.views.PersonalDetailsViewPage;
 
 /**
  *
@@ -30,30 +31,29 @@ public class MerchantMenuView extends VerticalLayout  {
 
     private VaultMain main;
     private TabSheet tab;
-    private VerticalLayout accountLedger, enrollMenteesTab;
-    private AccountDetailsWindow accDetailsWindow = new AccountDetailsWindow();
+    private VerticalLayout accountLedger, personalDetailsTab;
 
     public MerchantMenuView(VaultMain app, String selectedTab) {
         main = app;
-        enrollMenteesTab = new VerticalLayout();
-        enrollMenteesTab.setMargin(true);
-        enrollMenteesTab.addComponent(new StatusViewPage(main));
 
         accountLedger = new VerticalLayout();
         accountLedger.setMargin(true);
         accountLedger.addComponent(new AccountLedgerViewPage(main));
-
+        
+        personalDetailsTab = new VerticalLayout();
+        personalDetailsTab.setMargin(true);
+        personalDetailsTab.addComponent(new PersonalDetailsViewPage(main));
 
         tab = new TabSheet();
         tab.setHeight("100%");
         tab.setWidth("100%");
 
 
-        tab.addTab(enrollMenteesTab, "Enroll Mentees", null);
+        tab.addTab(personalDetailsTab, "Personal Details", null);
         tab.addTab(accountLedger, "Point Of Sale", null);
         //accDetailsWindow.setModal(true);
-        if (selectedTab.equals("CREATE")) {
-            tab.setSelectedTab(enrollMenteesTab);
+        if (selectedTab.equals("PERSONALDETAILS")) {
+            tab.setSelectedTab(personalDetailsTab);
         } else if (selectedTab.equals("ACCOUNTLEDGERVIEWPAGE")) {
             tab.setSelectedTab(accountLedger);
         }

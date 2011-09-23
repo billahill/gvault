@@ -13,5 +13,5 @@ import zm.hashcode.vault.services.Services;
 public interface UsersService extends Services<Users, Long>{
     public void updatePinNumber(String old, String newpin, String newpin2);
     public void resetPassword(Users user);
-    public void updatePassword(String old, String newPassword, String newPassword2);
+    public void updatePassword(Users user);
 }
