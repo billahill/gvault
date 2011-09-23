@@ -9,7 +9,7 @@ package zm.hashcode.vault.client.web.views.students;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import zm.hashcode.vault.client.web.VaultMain;
-import zm.hashcode.vault.client.web.views.students.views.StatusViewPage;
+import zm.hashcode.vault.client.web.views.students.views.PersonalDetailsViewPage;
 
 /**
  *
@@ -23,9 +23,9 @@ public class StudentsMenuView extends VerticalLayout {
     public StudentsMenuView(VaultMain app, String selectedTab) {
         main = app;
 
-        VerticalLayout enrollMenteesTab = new VerticalLayout();
-        enrollMenteesTab.setMargin(true);
-        enrollMenteesTab.addComponent(new StatusViewPage(main));
+        VerticalLayout personalDetailsTab = new VerticalLayout();
+        personalDetailsTab.setMargin(true);
+        personalDetailsTab.addComponent(new PersonalDetailsViewPage(main));
 
        
 
@@ -34,12 +34,12 @@ public class StudentsMenuView extends VerticalLayout {
         tab.setWidth("100%");
 
         
-        tab.addTab(enrollMenteesTab, "Enroll Mentees", null);
+        tab.addTab(personalDetailsTab, "Personal Details", null);
       
         
         
-        if (selectedTab.equals("CREATE")) {
-            tab.setSelectedTab(enrollMenteesTab);
+        if (selectedTab.equals("PERSONALDETAILS")) {
+            tab.setSelectedTab(personalDetailsTab);
         }
         addComponent(tab);
     }

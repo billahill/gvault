@@ -19,7 +19,10 @@ import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.addusers.UsersAdminMenuView;
 import zm.hashcode.vault.client.web.views.addusers.form.CreateUsersForm;
 import zm.hashcode.vault.client.web.views.addusers.model.UsersBean;
+import zm.hashcode.vault.infrastructure.factories.account.AccountFactory;
 import zm.hashcode.vault.infrastructure.factories.people.UsersFactory;
+import zm.hashcode.vault.infrastructure.util.GenerateAccountNumbers;
+import zm.hashcode.vault.model.account.Account;
 import zm.hashcode.vault.model.people.Users;
 
 /**
@@ -46,7 +49,10 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
         userForm.getSave().addListener((ClickListener) this);
         userForm.getCancel().addListener((ClickListener) this);
 
+        GenerateAccountNumbers accNumbers = new GenerateAccountNumbers();
+        String accountNumber = accNumbers.getAccountNumber().toString();
         final UsersBean bean = new UsersBean();
+        bean.setAccountNumber(accountNumber);
         final BeanItem item = new BeanItem(bean);
         form.setItemDataSource(item);
         form.setVisibleItemProperties(userForm.orderList());
@@ -97,12 +103,16 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
         final String physicaladdress = form.getField("physicalAddress").getValue().toString();
         final String postalCode = form.getField("postalcode").getValue().toString();
         final String contactstatus = form.getField("contactStatus").getValue().toString();
+        final String account = form.getField("accountNumber").getValue().toString();
+        final String pin = form.getField("pinNumber").getValue().toString();
+        final String type = form.getField("accountType").getValue().toString();
         final Users user = new UsersFactory.Builder(firstName, lastName).password(Password).
                 enabled(true).username(userName).title(userTitle).rolename(roleName).otherName(otherName).
                 phoneNumber(phoneNumber).cellNumber(cellnumber).emailAddress(emailaddress).
                 faxNumber(faxnumber).addressStatus(addressstatus).postalAddress(postaladdress).
                 physicalAddress(physicaladdress).postalcode(postalCode).contactStatus(contactstatus).build();
+        final Account userAccount = new AccountFactory.Builder(account, pin).accountType(type).build();
+        user.setAccount(userAccount);
         data.getUsersService().persist(user);
-
     }
 }

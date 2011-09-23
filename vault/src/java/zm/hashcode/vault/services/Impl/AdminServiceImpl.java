@@ -30,8 +30,9 @@ public class AdminServiceImpl implements AdminService {
     private AccountService accountService;
 
     @Override
-    public void loadCredit(BigDecimal amount, String username) {
-        Users user = usersService.getByPropertyName("username", username);
+    public void loadCredit(BigDecimal amount, Long id) {
+        //Users user = usersService.getByPropertyName("username", username);
+        Users user = usersService.find(id);
         AccountLedger accLedger = new AccountLedgerFactory.Builder(new Date(), "CREDIT").credit(amount).build();
         user.getAccount().getEntries().add(accLedger);
         usersService.merge(user);

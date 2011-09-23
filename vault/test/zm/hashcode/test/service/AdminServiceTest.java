@@ -58,9 +58,9 @@ public class AdminServiceTest {
     @Test
     public void loadCredit() {
         adminService = (AdminService) ctx.getBean("adminService");
-        purchaseService = (PurchaseService) ctx.getBean("purchaseService");
-        adminService.loadCredit(new BigDecimal(400), "carlos@john.com");
-        adminService.loadCredit(new BigDecimal(400), "carlos@john.com");
+//        purchaseService = (PurchaseService) ctx.getBean("purchaseService");
+//        adminService.loadCredit(new BigDecimal(400), "carlos@john.com");
+//        adminService.loadCredit(new BigDecimal(400), "carlos@john.com");
         Users user = purchaseService.getStudentInfo("carlos@john.com");
         System.out.println("User Details: \n" + "First Name: " + user.getName().getFirstname() + "\n" + "Last Name: "
                 + user.getName().getLastname() + "\n" + "Account Number: " + user.getAccount().getAccountNumber() + "\n"

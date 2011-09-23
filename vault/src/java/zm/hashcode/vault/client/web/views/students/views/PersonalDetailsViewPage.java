@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package zm.hashcode.vault.client.web.views.addusers.views;
+package zm.hashcode.vault.client.web.views.students.views;
 
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -23,9 +23,10 @@ import java.util.List;
 import zm.hashcode.vault.app.data.ClientDataService;
 import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.addusers.UsersAdminMenuView;
-import zm.hashcode.vault.client.web.views.addusers.form.ManageUsersForm;
 import zm.hashcode.vault.client.web.views.addusers.model.UsersBean;
-import zm.hashcode.vault.client.web.views.addusers.table.UsersTable;
+import zm.hashcode.vault.client.web.views.students.StudentsMenuView;
+import zm.hashcode.vault.client.web.views.students.forms.PersonalDetailsForm;
+import zm.hashcode.vault.infrastructure.util.authentication.GetUserCredentials;
 import zm.hashcode.vault.model.people.Address;
 import zm.hashcode.vault.model.people.Contacts;
 import zm.hashcode.vault.model.people.Name;
@@ -36,43 +37,38 @@ import zm.hashcode.vault.model.people.Users;
  *
  * @author boniface
  */
-public class ManageAccountUserViewPage extends VerticalLayout implements
-        ClickListener, ValueChangeListener {
+public class PersonalDetailsViewPage extends VerticalLayout implements
+        ClickListener {
 
     private final VaultMain main;
     private final Form form;
-    private final ManageUsersForm manageUsersFrom;
+    private final PersonalDetailsForm personalDetailsForm;
     private Long selectedItemId;
     private UsersBean usersBean = new UsersBean();
     private Users user = new Users();
     private BeanItem<UsersBean> uBeanItem = new BeanItem<UsersBean>(usersBean);
     private static final ClientDataService data = new ClientDataService();
-    private final UsersTable table;
     private HorizontalLayout horizontalLayout;
+    private final String username = new GetUserCredentials().username();
 
-    public ManageAccountUserViewPage(VaultMain app) {
+    public PersonalDetailsViewPage(VaultMain app) {
         main = app;
         horizontalLayout = new HorizontalLayout();
         setSizeFull();
-        manageUsersFrom = new ManageUsersForm();
-        form = manageUsersFrom.manageUsersForm();
+        personalDetailsForm = new PersonalDetailsForm();
+        form = personalDetailsForm.createUsersForm();
 
         // Add Listeners
-        manageUsersFrom.getSave().addListener((ClickListener) this);
-        manageUsersFrom.getEdit().addListener((ClickListener) this);
-        manageUsersFrom.getCancel().addListener((ClickListener) this);
-        manageUsersFrom.getDelete().addListener((ClickListener) this);
-        manageUsersFrom.getUpdate().addListener((ClickListener) this);
+        personalDetailsForm.getEdit().addListener((ClickListener) this);
+        personalDetailsForm.getCancel().addListener((ClickListener) this);
+        personalDetailsForm.getUpdate().addListener((ClickListener) this);
 
-        final UsersBean bean = new UsersBean();
+        final UsersBean bean = (UsersBean) setBean();
         final BeanItem item = new BeanItem(bean);
         form.setItemDataSource(item);
-        form.setVisibleItemProperties(manageUsersFrom.orderList());  
+        form.setVisibleItemProperties(personalDetailsForm.orderList());
         form.setReadOnly(true);
-        table = new UsersTable(main);
-        table.addListener((ValueChangeListener) this);
         horizontalLayout.addComponent(form);
-        horizontalLayout.addComponent(table);
         horizontalLayout.setComponentAlignment(form, Alignment.TOP_CENTER);
         addComponent(horizontalLayout);
     }
@@ -80,82 +76,66 @@ public class ManageAccountUserViewPage extends VerticalLayout implements
     @Override
     public void buttonClick(ClickEvent event) {
         final Button source = event.getButton();
-        if (source == manageUsersFrom.getSave()) {
-//            saveNewUser(form);            
-//            main.getMainWindow().showNotification("USER CREATED", "", Notification.DELAY_FOREVER);
-//            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREATEUSER"));
-        } else if (source == manageUsersFrom.getEdit()) {
+        if (source == personalDetailsForm.getEdit()) {
             form.setReadOnly(false);
-            manageUsersFrom.getSave().setVisible(false);
-            manageUsersFrom.getEdit().setVisible(false);
-            manageUsersFrom.getCancel().setVisible(true);
-            manageUsersFrom.getDelete().setVisible(false);
-            manageUsersFrom.getUpdate().setVisible(true);
-        } else if (source == manageUsersFrom.getCancel()) {
-            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "MANAGEACCOUNT"));
-        } else if (source == manageUsersFrom.getUpdate()) {
+            personalDetailsForm.getEdit().setVisible(false);
+            personalDetailsForm.getCancel().setVisible(true);
+            personalDetailsForm.getUpdate().setVisible(true);
+        } else if (source == personalDetailsForm.getCancel()) {
+            main.mainView.setSecondComponent(new StudentsMenuView(main, "PERSONALDETAILS"));
+        } else if (source == personalDetailsForm.getUpdate()) {
             saveEdited(form);
-            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "MANAGEACCOUNT"));
-        } else if (source == manageUsersFrom.getDelete()) {
-            deleteWindow();
-            
+            main.mainView.setSecondComponent(new StudentsMenuView(main, "PERSONALDETAILS"));
         }
     }
 
-    @Override
-    public void valueChange(ValueChangeEvent event) {
-        final Property property = event.getProperty();
+    public final UsersBean setBean() {
+        user = (Users) data.getPurchaseService().getStudentInfo(username);
+        usersBean.setId(user.getId());
+        usersBean.setUsername(user.getUsername());
+        usersBean.setPassword(user.getPassword());
+        usersBean.setFirstname(user.getName().getFirstname());
+        usersBean.setLastname(user.getName().getLastname());
+        usersBean.setOtherName(user.getName().getOtherName());
+        usersBean.setTitle(user.getName().getTitle());
+        usersBean.setEnabled(user.getEnabled());
 
-        if (property == table) {
-            setSelectedItemId(Long.parseLong(table.getValue().toString()));
-            user = data.getUsersService().find(getSelectedItemId());
-            usersBean.setId(user.getId());
-            usersBean.setUsername(user.getUsername());
-            usersBean.setPassword(user.getPassword());
-            usersBean.setFirstname(user.getName().getFirstname());
-            usersBean.setLastname(user.getName().getLastname());
-            usersBean.setOtherName(user.getName().getOtherName());
-            usersBean.setTitle(user.getName().getTitle());
-            usersBean.setEnabled(user.getEnabled());
-
-            if (user.getRoles() != null) {
-                List<Roles> rolesList = user.getRoles();
-                for (Roles roles : rolesList) {
-                    usersBean.setRolename(roles.getRolename());
-                }
-            }
-            if (user.getAddress() != null) {
-                List<Address> addressList = user.getAddress();
-                for (Address add : addressList) {
-                    usersBean.setPhysicalAddress(add.getPhysicalAddress());
-                    usersBean.setPostalAddress(add.getPostalcode());
-                    usersBean.setPostalcode(add.getPostalcode());
-                    usersBean.setAddressStatus(add.getAddressStatus());
-                }
-            }
-            if (user.getContacts() != null) {
-                List<Contacts> contacts = user.getContacts();
-                for (Contacts cont : contacts) {
-                    usersBean.setCellNumber(cont.getCellNumber());
-                    usersBean.setPhoneNumber(cont.getPhoneNumber());
-                    usersBean.setEmailAddress(cont.getEmailAddress());
-                    usersBean.setContactStatus(cont.getContactStatus());
-                    usersBean.setFaxNumber(cont.getFaxNumber());
-                }
-            }
-            if (usersBean != form.getItemDataSource()) {
-                form.setItemDataSource(uBeanItem);
-                form.setVisibleItemProperties(manageUsersFrom.orderList());
-
-                form.setReadOnly(true);
-                //Buttons Behaviou
-                manageUsersFrom.getSave().setVisible(false);
-                manageUsersFrom.getEdit().setVisible(true);
-                manageUsersFrom.getCancel().setVisible(true);
-                manageUsersFrom.getDelete().setVisible(true);
-                manageUsersFrom.getUpdate().setVisible(false);
+        if (user.getRoles() != null) {
+            List<Roles> rolesList = user.getRoles();
+            for (Roles roles : rolesList) {
+                usersBean.setRolename(roles.getRolename());
             }
         }
+        if (user.getAddress() != null) {
+            List<Address> addressList = user.getAddress();
+            for (Address add : addressList) {
+                usersBean.setPhysicalAddress(add.getPhysicalAddress());
+                usersBean.setPostalAddress(add.getPostalcode());
+                usersBean.setPostalcode(add.getPostalcode());
+                usersBean.setAddressStatus(add.getAddressStatus());
+            }
+        }
+        if (user.getContacts() != null) {
+            List<Contacts> contacts = user.getContacts();
+            for (Contacts cont : contacts) {
+                usersBean.setCellNumber(cont.getCellNumber());
+                usersBean.setPhoneNumber(cont.getPhoneNumber());
+                usersBean.setEmailAddress(cont.getEmailAddress());
+                usersBean.setContactStatus(cont.getContactStatus());
+                usersBean.setFaxNumber(cont.getFaxNumber());
+            }
+        }
+        if (usersBean != form.getItemDataSource()) {
+            form.setItemDataSource(uBeanItem);
+            form.setVisibleItemProperties(personalDetailsForm.orderList());
+
+            form.setReadOnly(true);
+            //Buttons Behaviou
+            personalDetailsForm.getEdit().setVisible(true);
+            personalDetailsForm.getCancel().setVisible(false);
+            personalDetailsForm.getUpdate().setVisible(false);
+        }
+        return usersBean;
     }
 
     public void saveEdited(Form form) {
@@ -214,8 +194,8 @@ public class ManageAccountUserViewPage extends VerticalLayout implements
         data.getUsersService().remove(u);
     }
 
-    public void deleteWindow() {
-        Window delete = new Window("Delete");
+    public void confirmUpdateWindow() {
+        Window delete = new Window("Save Changes");
         delete.setModal(true);
         delete.setStyleName(Reindeer.LAYOUT_BLUE);
         delete.setWidth("260px");
@@ -225,19 +205,19 @@ public class ManageAccountUserViewPage extends VerticalLayout implements
         delete.setCloseShortcut(KeyCode.ESCAPE, null);
 
         Label helpText = new Label(
-                "Are you sure you want to delete user?",
+                "Are you sure you want to save changes?",
                 Label.CONTENT_XHTML);
         delete.addComponent(helpText);
 
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
-        Button yes = new Button("Delete", new Button.ClickListener() {
+        Button yes = new Button("Save", new Button.ClickListener() {
 
             @Override
             public void buttonClick(ClickEvent event) {
                 deleteUser(form);
                 main.mainView.setSecondComponent(new UsersAdminMenuView(main, "MANAGEACCOUNT"));
-                main.getMainWindow().showNotification("User Deleted", Window.Notification.DELAY_FOREVER);
+                main.getMainWindow().showNotification("Changes Saved", Window.Notification.DELAY_FOREVER);
                 main.getMainWindow().removeWindow(event.getButton().getWindow());
             }
         });

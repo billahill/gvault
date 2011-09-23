@@ -69,8 +69,8 @@ public class PurchaseServiceTest {
         purchaseService = (PurchaseService) ctx.getBean("purchaseService");
         System.out.println("\n--------TESTING CHECKBALANCE---------\n");
         String acc = "07313013948";
-        BigDecimal amount = new BigDecimal("12");
-       String balance = (String)purchaseService.checkBalance(amount, acc);
+        BigDecimal amount = new BigDecimal("3000");
+       String balance = (String)purchaseService.checkBalance(amount, "fernandoneto@gmail.com");
         if(balance.equals("You have enough funds")){
             System.out.println("Enough money");
         }else{
@@ -82,7 +82,7 @@ public class PurchaseServiceTest {
     public void getBalance04(){
         purchaseService = (PurchaseService) ctx.getBean("purchaseService");
         System.out.println("\n--------TESTING GETBALANCE---------\n");
-        BigDecimal balance = purchaseService.getBalance("carlos@john.com");
+        BigDecimal balance = purchaseService.getBalance("fernandoneto@gmail.com");
         System.out.println(balance.toString());
     }
     

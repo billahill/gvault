@@ -8,18 +8,25 @@ import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Form;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
+import com.vaadin.ui.themes.Reindeer;
+import java.math.BigDecimal;
 import java.util.List;
 import zm.hashcode.vault.app.data.ClientDataService;
 import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.addusers.UsersAdminMenuView;
-import zm.hashcode.vault.client.web.views.addusers.form.ResetUsersAccountForm;
+import zm.hashcode.vault.client.web.views.addusers.form.TransferMoneyToUsersForm;
+import zm.hashcode.vault.client.web.views.addusers.model.AccountLedgerBean;
 import zm.hashcode.vault.client.web.views.addusers.model.UsersBean;
 import zm.hashcode.vault.client.web.views.addusers.table.UsersTable;
 import zm.hashcode.vault.model.people.Address;
@@ -28,35 +35,36 @@ import zm.hashcode.vault.model.people.Users;
 
 /**
  *
- * @author carlos
+ * @author boniface
  */
-public class ResetUsersAccountViewPage extends VerticalLayout implements
+public class TransferMoneyToUsersViewPage extends VerticalLayout implements
         ClickListener, ValueChangeListener {
 
     private final VaultMain main;
     private final Form form;
-    private final ResetUsersAccountForm resetUsersAccountFrom;
+    private final TransferMoneyToUsersForm transferMoneyToUsersForm;
     private Long selectedItemId;
     private UsersBean usersBean = new UsersBean();
     private Users user = new Users();
-    private BeanItem<UsersBean> uBeanItem = new BeanItem<UsersBean>(usersBean);
+    private AccountLedgerBean bean = new AccountLedgerBean();
+    private BeanItem<AccountLedgerBean> accountBeanItem = new BeanItem<AccountLedgerBean>(bean);
     private static final ClientDataService data = new ClientDataService();
     private final UsersTable table;
 
-    public ResetUsersAccountViewPage(VaultMain app) {
+    public TransferMoneyToUsersViewPage(VaultMain app) {
         main = app;
         setSizeFull();
-        resetUsersAccountFrom = new ResetUsersAccountForm();
-        form = resetUsersAccountFrom.createResetUsersForm();
+        transferMoneyToUsersForm = new TransferMoneyToUsersForm();
+        form = transferMoneyToUsersForm.createResetUsersForm();
 
         // Add Listeners
-        resetUsersAccountFrom.getReset().addListener((ClickListener) this);
-        resetUsersAccountFrom.getCancel().addListener((ClickListener) this);
+        transferMoneyToUsersForm.getcreditUser().addListener((ClickListener) this);
+        transferMoneyToUsersForm.getCancel().addListener((ClickListener) this);
 
-        final UsersBean bean = new UsersBean();
-        final BeanItem item = new BeanItem(bean);
-        form.setItemDataSource(item);
-        form.setVisibleItemProperties(resetUsersAccountFrom.orderList());
+        // final AccountLedgerBean bean = new AccountLedgerBean();
+        // final BeanItem item = new BeanItem(bean);
+        //form.setItemDataSource(item);
+        form.setVisibleItemProperties(transferMoneyToUsersForm.orderList());
 
         addComponent(form);
         setComponentAlignment(form, Alignment.TOP_CENTER);
@@ -68,12 +76,10 @@ public class ResetUsersAccountViewPage extends VerticalLayout implements
     @Override
     public void buttonClick(ClickEvent event) {
         final Button source = event.getButton();
-        if (source == resetUsersAccountFrom.getReset()) {
-            resetUser(form);
-            main.getMainWindow().showNotification("USER RESETED", "", Notification.DELAY_FOREVER);
-            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "RESETUSER"));
-        } else if (source == resetUsersAccountFrom.getCancel()) {
-            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "RESETUSER"));
+        if (source == transferMoneyToUsersForm.getcreditUser()) {
+            creditWindow();
+        } else if (source == transferMoneyToUsersForm.getCancel()) {
+            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREDITUSER"));
         }
     }
 
@@ -113,13 +119,13 @@ public class ResetUsersAccountViewPage extends VerticalLayout implements
                 }
             }
             if (usersBean != form.getItemDataSource()) {
-                form.setItemDataSource(uBeanItem);
-                form.setVisibleItemProperties(resetUsersAccountFrom.orderList());
+                form.setItemDataSource(accountBeanItem);
+                form.setVisibleItemProperties(transferMoneyToUsersForm.orderList());
 
-                form.setReadOnly(true);
+                form.setReadOnly(false);
                 //Buttons Behaviou
-                resetUsersAccountFrom.getReset().setVisible(true);
-                resetUsersAccountFrom.getCancel().setVisible(true);
+                transferMoneyToUsersForm.getcreditUser().setVisible(true);
+                transferMoneyToUsersForm.getCancel().setVisible(true);
             }
         }
     }
@@ -138,9 +144,58 @@ public class ResetUsersAccountViewPage extends VerticalLayout implements
         this.selectedItemId = selectedItemId;
     }
 
-    public void resetUser(Form form) {
-        final Long id = Long.parseLong(form.getField("id").getValue().toString());
-        final Users u = data.getUsersService().find(id);
-        data.getUsersService().resetPassword(user);
+    public void creditWindow() {
+        Window delete = new Window("Credit");
+        delete.setModal(true);
+        delete.setStyleName(Reindeer.LAYOUT_BLUE);
+        delete.setWidth("260px");
+        delete.setResizable(false);
+        delete.setClosable(false);
+        delete.setDraggable(false);
+        delete.setCloseShortcut(KeyCode.ESCAPE, null);
+
+        Label helpText = new Label(
+                "Are you sure you want to credit the user?",
+                Label.CONTENT_XHTML);
+        delete.addComponent(helpText);
+
+        HorizontalLayout buttons = new HorizontalLayout();
+        buttons.setSpacing(true);
+        Button yes = new Button("Credit", new Button.ClickListener() {
+
+            @Override
+            public void buttonClick(ClickEvent event) {
+                creditUser(form);
+                main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREDITUSER"));
+                main.getMainWindow().showNotification("USER CREDITED", "", Notification.DELAY_FOREVER);
+                main.getMainWindow().removeWindow(event.getButton().getWindow());
+            }
+        });
+        yes.setStyleName(Reindeer.BUTTON_DEFAULT);
+        yes.focus();
+        buttons.addComponent(yes);
+        Button no = new Button("Cancel", new Button.ClickListener() {
+
+            @Override
+            public void buttonClick(ClickEvent event) {
+                main.getMainWindow().removeWindow(event.getButton().getWindow());
+            }
+        });
+        buttons.addComponent(no);
+
+        delete.addComponent(buttons);
+        ((VerticalLayout) delete.getContent()).setComponentAlignment(buttons,
+                "center");
+        ((VerticalLayout) delete.getContent()).setSpacing(true);
+
+        main.getMainWindow().addWindow(delete);
+    }
+
+    public void creditUser(Form form) {
+        //final Long id = Long.parseLong(form.getField("id").getValue().toString());
+        Long id = usersBean.getId();
+        final String strCredit = form.getField("credit").getValue().toString();
+        BigDecimal credit = new BigDecimal(strCredit);
+        data.getAdminService().loadCredit(credit, id);
     }
 }
