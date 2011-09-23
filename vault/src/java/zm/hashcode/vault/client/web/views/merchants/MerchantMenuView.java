@@ -21,17 +21,18 @@ import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.admin.views.StatusViewPage;
 import zm.hashcode.vault.client.web.views.merchants.views.AccountDetailsWindow;
 import zm.hashcode.vault.client.web.views.merchants.views.AccountLedgerViewPage;
+import zm.hashcode.vault.client.web.views.merchants.views.ChangePasswordViewPage;
 import zm.hashcode.vault.client.web.views.merchants.views.PersonalDetailsViewPage;
 
 /**
  *
  * @author boniface
  */
-public class MerchantMenuView extends VerticalLayout  {
+public class MerchantMenuView extends VerticalLayout {
 
     private VaultMain main;
     private TabSheet tab;
-    private VerticalLayout accountLedger, personalDetailsTab;
+    private VerticalLayout accountLedger, personalDetailsTab, changePasswordTab;
 
     public MerchantMenuView(VaultMain app, String selectedTab) {
         main = app;
@@ -39,23 +40,30 @@ public class MerchantMenuView extends VerticalLayout  {
         accountLedger = new VerticalLayout();
         accountLedger.setMargin(true);
         accountLedger.addComponent(new AccountLedgerViewPage(main));
-        
+
         personalDetailsTab = new VerticalLayout();
         personalDetailsTab.setMargin(true);
         personalDetailsTab.addComponent(new PersonalDetailsViewPage(main));
-
+        
+        changePasswordTab = new VerticalLayout();
+        changePasswordTab.setMargin(true);
+        changePasswordTab.addComponent(new ChangePasswordViewPage(main));
+        
         tab = new TabSheet();
         tab.setHeight("100%");
         tab.setWidth("100%");
 
 
         tab.addTab(personalDetailsTab, "Personal Details", null);
+        tab.addTab(changePasswordTab, "Change Password", null);
         tab.addTab(accountLedger, "Point Of Sale", null);
         //accDetailsWindow.setModal(true);
         if (selectedTab.equals("PERSONALDETAILS")) {
             tab.setSelectedTab(personalDetailsTab);
         } else if (selectedTab.equals("ACCOUNTLEDGERVIEWPAGE")) {
             tab.setSelectedTab(accountLedger);
+        }else if (selectedTab.equals("CHANGEPASSWORD")) {
+            tab.setSelectedTab(changePasswordTab);
         }
         addComponent(tab);
     }
