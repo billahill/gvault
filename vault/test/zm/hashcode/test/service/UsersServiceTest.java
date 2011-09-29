@@ -62,14 +62,16 @@ public class UsersServiceTest {
                 contactStatus("CURRENT").emailAddress("current@gmail.com").
                 faxNumber("0218938393").otherName("Lukas").
                 phoneNumber("921921912").physicalAddress("20 Chanda Mali Close").postalAddress("P.O.Box 23487").postalcode("7654").
-                rolename("ADMIN").title("MR").username("carlos@john.com").enabled(true).build();
+                rolename("ADMIN").title("MR").username("carlos@john.com").enabled(true).password("lala").build();
+         Account account = new AccountFactory.Builder("07213013948", "115544").accountType("savings").build();
+        user.setAccount(account);
         usersService.persist(user);
         usersId = user.getId();
         Assert.assertNotNull(user.getId());
 
     }
 
-    @Test
+    @Ignore
     public void createAccount02() {
         usersService = (UsersService) ctx.getBean("usersService");
         Users user = usersService.find(usersId);

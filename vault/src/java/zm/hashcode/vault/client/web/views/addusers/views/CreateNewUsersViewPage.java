@@ -14,6 +14,8 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.Notification;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import zm.hashcode.vault.app.data.ClientDataService;
 import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.addusers.UsersAdminMenuView;
@@ -74,9 +76,10 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
 //                return;
 //
 //            }
-            saveNewUser(form);
-            main.getMainWindow().showNotification("USER CREATED", "", Notification.DELAY_FOREVER);
-            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREATEUSER"));
+            saveNewUser(form); 
+            
+            
+            
         } else if (source == userForm.getCancel()) {
             main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREATEUSER"));
         }
@@ -87,25 +90,63 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
     }
 
     public void saveNewUser(Form form) {
-        final String userName = form.getField("username").getValue().toString();
-        final String Password = form.getField("password").getValue().toString();
-        final String firstName = form.getField("firstname").getValue().toString();
-        final String lastName = form.getField("lastname").getValue().toString();
-        final String roleName = form.getField("rolename").getValue().toString();
-        final String userTitle = form.getField("title").getValue().toString();
-        final String otherName = form.getField("otherName").getValue().toString();
-        final String phoneNumber = form.getField("phoneNumber").getValue().toString();
-        final String cellnumber = form.getField("cellNumber").getValue().toString();
-        final String emailaddress = form.getField("emailAddress").getValue().toString();
-        final String faxnumber = form.getField("faxNumber").getValue().toString();
-        final String addressstatus = form.getField("addressStatus").getValue().toString();
-        final String postaladdress = form.getField("postalAddress").getValue().toString();
-        final String physicaladdress = form.getField("physicalAddress").getValue().toString();
-        final String postalCode = form.getField("postalcode").getValue().toString();
-        final String contactstatus = form.getField("contactStatus").getValue().toString();
-        final String account = form.getField("accountNumber").getValue().toString();
-        final String pin = form.getField("pinNumber").getValue().toString();
-        final String type = form.getField("accountType").getValue().toString();
+       boolean tmp = true;
+    
+        try{
+            final String userName = form.getField("username").getValue().toString();
+            final String Password = form.getField("password").getValue().toString();
+            if (Password.length() < 6)
+                getWindow().showNotification("Password too short","Please insert a password with more than 6 leters" , Notification.TYPE_ERROR_MESSAGE);
+            final String firstName = form.getField("firstname").getValue().toString();
+            final String lastName = form.getField("lastname").getValue().toString();
+            final String roleName = form.getField("rolename").getValue().toString();
+            final String userTitle = form.getField("title").getValue().toString();
+            final String otherName = form.getField("otherName").getValue().toString();
+            final String phoneNumber = form.getField("phoneNumber").getValue().toString();
+            final String cellnumber = form.getField("cellNumber").getValue().toString();
+            final String emailaddress = form.getField("emailAddress").getValue().toString();
+            final String faxnumber = form.getField("faxNumber").getValue().toString();
+            final String addressstatus = form.getField("addressStatus").getValue().toString();
+            final String postaladdress = form.getField("postalAddress").getValue().toString();
+            final String physicaladdress = form.getField("physicalAddress").getValue().toString();
+            final String postalCode = form.getField("postalcode").getValue().toString();
+            final String contactstatus = form.getField("contactStatus").getValue().toString();
+            final String account = form.getField("accountNumber").getValue().toString();
+            final String pin = form.getField("pinNumber").getValue().toString();
+            final String type = form.getField("accountType").getValue().toString();
+            //check if is  aeamial address
+            
+            
+           
+            //converting thing that dont need to be strings
+            int intPin = Integer.parseInt(pin);
+            int intPost = Integer.parseInt(postalCode);
+            long longPhone = Long.parseLong(phoneNumber);
+            long longCell = Long.parseLong(cellnumber);
+            long longFax = Long.parseLong(faxnumber);
+            
+            if (tmp = true)
+                if(isValidEmailAddress(emailaddress))
+            SaveUser(firstName, lastName, Password, userName, userTitle, roleName, otherName, phoneNumber ,cellnumber ,emailaddress,faxnumber, addressstatus,postaladdress,physicaladdress,postalCode,contactstatus,account,pin,type);
+            else
+             getWindow().showNotification("cannot create class", "Error", Notification.TYPE_ERROR_MESSAGE);   
+         }
+        catch (NullPointerException NullPoint )
+        {
+            getWindow().showNotification("Data Missimg", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
+            tmp = false;
+        }
+        
+        catch (Exception e)
+        {
+            getWindow().showNotification("You have put letters in for your numbers, ping and/or you postal code", "Please correct ", Notification.TYPE_ERROR_MESSAGE);
+            tmp = false;
+        }
+        
+    }
+    
+    private void SaveUser(String firstName, String lastName,String Password,String userName ,String userTitle,String roleName,String otherName,String phoneNumber,String cellnumber, String emailaddress,String faxnumber,String addressstatus,String postaladdress,String physicaladdress,String postalCode,String contactstatus,String account,String pin,String type)
+    {
         final Users user = new UsersFactory.Builder(firstName, lastName).password(Password).
                 enabled(true).username(userName).title(userTitle).rolename(roleName).otherName(otherName).
                 phoneNumber(phoneNumber).cellNumber(cellnumber).emailAddress(emailaddress).
@@ -114,5 +155,22 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
         final Account userAccount = new AccountFactory.Builder(account, pin).accountType(type).build();
         user.setAccount(userAccount);
         data.getUsersService().persist(user);
+        main.getMainWindow().showNotification("USER CREATED", "", Notification.DELAY_FOREVER);
+        main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREATEUSER"));
+    }
+    
+    private boolean isValidEmailAddress(String email) 
+    {
+       boolean result = true;
+       try {
+              InternetAddress emailAddr = new InternetAddress(email);
+              emailAddr.validate();
+           } 
+       catch (AddressException ex) 
+           {
+              getWindow().showNotification("Your Email Adress is not valid", "Please put in a proper email address", Notification.TYPE_ERROR_MESSAGE);
+              result = false;
+           }
+       return result;
     }
 }
