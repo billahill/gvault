@@ -50,7 +50,10 @@ public class TabAccordian extends Accordion {
         VerticalLayout adminLayout = new VerticalLayout();
         AdminTreeMenu adminTree = new AdminTreeMenu(app);
         adminLayout.addComponent(adminTree);
-        addTab(adminLayout, ADMIN, null);
+        
+        if (new GetUserCredentials().isUserWithRole("ADMIN")) {
+            addTab(adminLayout, ADMIN, null);
+        }
 
         
 
