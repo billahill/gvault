@@ -184,6 +184,7 @@ public class CreateUsersForm {
                 ((TextField) field).setNullRepresentation("");
                 ((TextField) field).setRequired(false);
                 ((TextField) field).setRequiredError("Please Enter Value");
+                
             } else if ("phoneNumber".equals(propertyId)) {
                 field = new TextField("Phone Number:");
                 ((TextField) field).setWidth(COMMON_FIELD_WIDTH);
@@ -202,11 +203,12 @@ public class CreateUsersForm {
                 ((TextField) field).setNullRepresentation("");
                 ((TextField) field).setRequired(true);
                 ((TextField) field).setRequiredError("Please Enter Value");
+                
             } else if ("faxNumber".equals(propertyId)) {
                 field = new TextField("Fax Number:");
                 ((TextField) field).setWidth(COMMON_FIELD_WIDTH);
                 ((TextField) field).setNullRepresentation("");
-                ((TextField) field).setRequired(true);
+                ((TextField) field).setRequired(false);
                 ((TextField) field).setRequiredError("Please Enter Value");
             } else if ("addressStatus".equals(propertyId)) {
                 field = new Select("Address Status:");

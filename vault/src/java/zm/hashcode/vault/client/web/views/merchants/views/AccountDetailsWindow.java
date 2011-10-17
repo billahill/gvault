@@ -34,6 +34,7 @@ public class AccountDetailsWindow extends Window {
     }
 
     private void loadUI() {
+        try {
         accform = new AccountWindowForm();
         form = accform.createFrom();
         accform.getSave().addListener(new ClickListener() {
@@ -42,6 +43,9 @@ public class AccountDetailsWindow extends Window {
             public void buttonClick(ClickEvent event) {
                 String accNumber = form.getField("accountNumber").getValue().toString();
                 String pinNumber = form.getField("pinNumber").getValue().toString();
+                
+                long tmp = Long.parseLong(accNumber);
+                tmp = Long.parseLong(pinNumber);
                 Account account = data.getAccountService().getByPropertyName("accountNumber", accNumber);
                 if(accNumber.equals(account.getAccountNumber()) && pinNumber.equals(account.getPinNumber().toString()))
                 {
@@ -60,5 +64,17 @@ public class AccountDetailsWindow extends Window {
                 main.mainView.setSecondComponent(new MerchantMenuView(main, "ACCOUNTLEDGERVIEWPAGE"));
             }
         });
+        }
+         catch (NullPointerException NullPoint )
+        {
+            getWindow().showNotification("Data Missing", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
+           
+        }
+        
+        catch (Exception e)
+        {
+            getWindow().showNotification("You have put letters in for your numbers, ping and/or you postal code", "Please correct ", Notification.TYPE_ERROR_MESSAGE);
+            
+        }
     }
 }

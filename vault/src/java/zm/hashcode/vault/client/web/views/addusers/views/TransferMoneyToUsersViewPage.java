@@ -192,10 +192,25 @@ public class TransferMoneyToUsersViewPage extends VerticalLayout implements
     }
 
     public void creditUser(Form form) {
-        //final Long id = Long.parseLong(form.getField("id").getValue().toString());
         Long id = usersBean.getId();
-        final String strCredit = form.getField("credit").getValue().toString();
-        BigDecimal credit = new BigDecimal(strCredit);
-        data.getAdminService().loadCredit(credit, id);
+        String strCreditTmp;
+        //final Long id = Long.parseLong(form.getField("id").getValue().toString());
+        try {
+            if (form.getField("credit").isModified()) {
+                strCreditTmp = form.getField("credit").getValue().toString();
+                Long strCredit = Long.parseLong(strCreditTmp);
+                BigDecimal credit = new BigDecimal(strCredit);
+                data.getAdminService().loadCredit(credit, id);
+            }
+
+
+
+        } catch (NullPointerException NullPoint) {
+            getWindow().showNotification("Data Missing", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            getWindow().showNotification("Error Has occured, Error ", Notification.TYPE_ERROR_MESSAGE);
+
+        }
     }
 }

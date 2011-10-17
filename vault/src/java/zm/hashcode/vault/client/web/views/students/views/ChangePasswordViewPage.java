@@ -121,6 +121,7 @@ public class ChangePasswordViewPage extends VerticalLayout implements
     }
 
     public void saveNewPassword(Form form) {
+        try{
         final String oldPassword = form.getField("oldPassword").getValue().toString();
         final String newPassword = form.getField("newPassword").getValue().toString();
         final String newPassword2 = form.getField("newPassword2").getValue().toString();
@@ -133,6 +134,17 @@ public class ChangePasswordViewPage extends VerticalLayout implements
         }else{
             main.getMainWindow().showNotification("Password Updated", "", Notification.DELAY_FOREVER);
         }
+        }
+        catch (NullPointerException NullPoint )
+        {
+            getWindow().showNotification("Data Missing", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
+           
+        }
         
+        catch (Exception e)
+        {
+            getWindow().showNotification("You Have Encounted a Error Please Notify Admin Staff", "Thanks you", Notification.TYPE_ERROR_MESSAGE);
+            
+        }
     }
 }

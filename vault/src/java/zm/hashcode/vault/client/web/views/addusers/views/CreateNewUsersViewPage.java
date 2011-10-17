@@ -92,7 +92,8 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
     public void saveNewUser(Form form) {
        boolean tmp = true;
     
-        try{
+        try
+        {
             final String userName = form.getField("username").getValue().toString();
             final String Password = form.getField("password").getValue().toString();
             if (Password.length() < 6)
@@ -101,11 +102,8 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
             final String lastName = form.getField("lastname").getValue().toString();
             final String roleName = form.getField("rolename").getValue().toString();
             final String userTitle = form.getField("title").getValue().toString();
-            final String otherName = form.getField("otherName").getValue().toString();
-            final String phoneNumber = form.getField("phoneNumber").getValue().toString();
             final String cellnumber = form.getField("cellNumber").getValue().toString();
-            final String emailaddress = form.getField("emailAddress").getValue().toString();
-            final String faxnumber = form.getField("faxNumber").getValue().toString();
+            final String emailaddress = form.getField("emailAddress").getValue().toString(); 
             final String addressstatus = form.getField("addressStatus").getValue().toString();
             final String postaladdress = form.getField("postalAddress").getValue().toString();
             final String physicaladdress = form.getField("physicalAddress").getValue().toString();
@@ -114,26 +112,58 @@ public class CreateNewUsersViewPage extends VerticalLayout implements
             final String account = form.getField("accountNumber").getValue().toString();
             final String pin = form.getField("pinNumber").getValue().toString();
             final String type = form.getField("accountType").getValue().toString();
-            //check if is  aeamial address
+            final String otherName;
+             final String phoneNumber;
+             final String faxnumber;
+             
+             if (form.getField("otherName").isModified())   
+             {
+                otherName= form.getField("otherName").getValue().toString();
+             }
+             else 
+             {
+                 otherName = "";
+             }
+        
+            if (form.getField("phoneNumber").isModified())
+            {
+            phoneNumber = form.getField("phoneNumber").getValue().toString();
+            }
+            else 
+            {
+                phoneNumber = "";
+            }
+           
+            if (form.getField("phoneNumber").isModified())
+            {
+             faxnumber = form.getField("faxNumber").getValue().toString();
+            }            
+            else
+            {
+                faxnumber = "";
+            }
+            
             
             
            
             //converting thing that dont need to be strings
             int intPin = Integer.parseInt(pin);
             int intPost = Integer.parseInt(postalCode);
-            long longPhone = Long.parseLong(phoneNumber);
             long longCell = Long.parseLong(cellnumber);
+            long longPhone = Long.parseLong(phoneNumber);
             long longFax = Long.parseLong(faxnumber);
             
+            
             if (tmp = true)
-                if(isValidEmailAddress(emailaddress))
-            SaveUser(firstName, lastName, Password, userName, userTitle, roleName, otherName, phoneNumber ,cellnumber ,emailaddress,faxnumber, addressstatus,postaladdress,physicaladdress,postalCode,contactstatus,account,pin,type);
-            else
-             getWindow().showNotification("cannot create class", "Error", Notification.TYPE_ERROR_MESSAGE);   
-         }
+                //check if is valid emial address
+                if (isValidEmailAddress(emailaddress))
+                 SaveUser(firstName, lastName, Password, userName, userTitle, roleName, otherName, phoneNumber ,cellnumber ,emailaddress,faxnumber, addressstatus,postaladdress,physicaladdress,postalCode,contactstatus,account,pin,type);
+                else
+                getWindow().showNotification("cannot create class", "Error", Notification.TYPE_ERROR_MESSAGE);   
+        }
         catch (NullPointerException NullPoint )
         {
-            getWindow().showNotification("Data Missimg", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
+            getWindow().showNotification("Data Missing", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
             tmp = false;
         }
         
