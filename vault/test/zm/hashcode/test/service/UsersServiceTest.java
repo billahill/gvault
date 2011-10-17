@@ -75,7 +75,7 @@ public class UsersServiceTest {
     public void createAccount02() {
         usersService = (UsersService) ctx.getBean("usersService");
         Users user = usersService.find(usersId);
-        Account account = new AccountFactory.Builder("07213013948", "115544").accountType("savings").build();
+        Account account = new AccountFactory.Builder("0721345687", "115544").accountType("savings").build();
         user.setAccount(account);
         usersService.merge(user);
         Users u = usersService.find(usersId);
@@ -122,7 +122,7 @@ public class UsersServiceTest {
 
     }
 
-    @Ignore
+    @Test
     public void testDelete08() {
         usersService = (UsersService) ctx.getBean("usersService");
         Users users = usersService.find(usersId);

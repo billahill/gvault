@@ -5,21 +5,23 @@
 package zm.hashcode.vault.client.web.views.addusers.table;
 
 import com.vaadin.ui.Table;
-import java.util.List;
 import zm.hashcode.vault.app.data.ClientDataService;
 import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.model.people.Users;
+import java.util.List;
 
 /**
  *
- * @author carlos
+ * @author Andre
  */
-public class UsersTable extends Table {
 
-    private static final ClientDataService data = new ClientDataService();
-    private final VaultMain main;
 
-    public UsersTable(VaultMain app) {
+public class DeletedUserTable extends Table{
+    
+private static final ClientDataService data = new ClientDataService();
+private final VaultMain main; 
+    
+public DeletedUserTable(VaultMain app) {
         this.main = app;
         // Make Table fill all space
         setSizeFull();
@@ -32,7 +34,7 @@ public class UsersTable extends Table {
         // Add Data Columns
         List<Users> users = data.getUsersService().findAll();
         for (Users u : users) {
-          if(u.getEnabled() == true)
+            if(u.getEnabled() == false)
             {
             addItem(new Object[]{u.getUsername(),
                         u.getName().getFirstname(),

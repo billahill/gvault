@@ -68,7 +68,7 @@ public class ManageAccountUserViewPage extends VerticalLayout implements
         final UsersBean bean = new UsersBean();
         final BeanItem item = new BeanItem(bean);
         form.setItemDataSource(item);
-        form.setVisibleItemProperties(manageUsersFrom.orderList());  
+        form.setVisibleItemProperties(manageUsersFrom.orderList());
         form.setReadOnly(true);
         table = new UsersTable(main);
         table.addListener((ValueChangeListener) this);
@@ -99,7 +99,7 @@ public class ManageAccountUserViewPage extends VerticalLayout implements
             main.mainView.setSecondComponent(new UsersAdminMenuView(main, "MANAGEACCOUNT"));
         } else if (source == manageUsersFrom.getDelete()) {
             deleteWindow();
-            
+
         }
     }
 
@@ -235,7 +235,7 @@ public class ManageAccountUserViewPage extends VerticalLayout implements
     public void deleteUser(Form form) {
         final Long id = Long.parseLong(form.getField("id").getValue().toString());
         final Users u = data.getUsersService().find(id);
-        data.getUsersService().remove(u);
+        data.getUsersService().DisableUser(u);
     }
 
     public void deleteWindow() {

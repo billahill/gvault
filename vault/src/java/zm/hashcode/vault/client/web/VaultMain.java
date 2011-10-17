@@ -37,12 +37,13 @@ public class VaultMain extends Application implements HttpServletRequestListener
     private AuthenticationManager authenticationManager;
     private ApplicationContext ctx;
     private Authentication auth;
+    private LoginWindow login = new LoginWindow();
 
     @Override
     public void init() {
         setInstance(this);
         setTheme("reindeer");
-        setMainWindow(new LoginWindow());
+        setMainWindow(login);
     }
 
     public static VaultMain getInstance() {

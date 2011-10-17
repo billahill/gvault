@@ -8,6 +8,7 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.addusers.views.CreateNewUsersViewPage;
+import zm.hashcode.vault.client.web.views.addusers.views.EnableUsersViewPage;
 import zm.hashcode.vault.client.web.views.addusers.views.TransferMoneyToUsersViewPage;
 import zm.hashcode.vault.client.web.views.addusers.views.ManageAccountUserViewPage;
 import zm.hashcode.vault.client.web.views.addusers.views.ResetUsersAccountViewPage;
@@ -40,7 +41,9 @@ public class UsersAdminMenuView extends VerticalLayout {
         transferMoneyTab.setMargin(true);
         transferMoneyTab.addComponent(new TransferMoneyToUsersViewPage(main));
 
-
+        VerticalLayout EnableUserstab = new VerticalLayout();
+        EnableUserstab.setMargin(true);
+        EnableUserstab.addComponent(new EnableUsersViewPage(main));
 
         tab = new TabSheet();
         tab.setHeight("100%");
@@ -51,7 +54,7 @@ public class UsersAdminMenuView extends VerticalLayout {
         tab.addTab(manageUserTab, "Manage User Account", null);
         tab.addTab(resetUserAccountTab, "Reset User Account", null);
         tab.addTab(transferMoneyTab, "Credit User", null);
-
+        tab.addTab(EnableUserstab, "Enable User/Account", null);
         if (selectedTab.equals("CREDITUSER")) {
             tab.setSelectedTab(transferMoneyTab);
         } else if (selectedTab.equals("CREATEUSER")) {
@@ -60,6 +63,8 @@ public class UsersAdminMenuView extends VerticalLayout {
             tab.setSelectedTab(manageUserTab);
         } else if (selectedTab.equals("RESETUSER")) {
             tab.setSelectedTab(resetUserAccountTab);
+        } else if (selectedTab.equals("Enable User/Account")) {
+            tab.setSelectedTab(EnableUserstab);
         }
         addComponent(tab);
     }

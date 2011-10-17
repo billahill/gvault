@@ -6,12 +6,20 @@ package zm.hashcode.vault.services.people;
 
 import zm.hashcode.vault.model.people.Users;
 import zm.hashcode.vault.services.Services;
+
 /**
  *
  * @author carlos
  */
-public interface UsersService extends Services<Users, Long>{
+public interface UsersService extends Services<Users, Long> {
+
     public void updatePinNumber(String old, String newpin, String newpin2);
+
     public void resetPassword(Users user);
+
     public void updatePassword(Users user);
+
+    public void DisableUser(Users user);
+
+    public void EnableUser(Users user);
 }

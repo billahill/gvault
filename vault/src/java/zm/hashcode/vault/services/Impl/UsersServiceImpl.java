@@ -22,20 +22,21 @@ import zm.hashcode.vault.services.people.UsersService;
  */
 @Service("usersService")
 @Transactional
-public class UsersServiceImpl implements UsersService{
+public class UsersServiceImpl implements UsersService {
+
     @Autowired
     private UsersDAO usersDAO;
     private AccountService accountService;
 
     @Override
     public Users find(Long id) {
-        if(id!= null){
-        return usersDAO.find(id);
+        if (id != null) {
+            return usersDAO.find(id);
         }
         return null;
     }
 
-    @Transactional(readOnly= false)
+    @Transactional(readOnly = false)
     @Override
     public void persist(Users entity) {
         usersDAO.persist(entity);
@@ -54,22 +55,22 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public List<Users> findAll() {
-         return  usersDAO.findAll();
+        return usersDAO.findAll();
     }
 
     @Override
     public List<Users> findInRange(int firstResult, int maxResults) {
-         return usersDAO.findInRange(firstResult, maxResults);
+        return usersDAO.findInRange(firstResult, maxResults);
     }
 
     @Override
     public long count() {
-         return  usersDAO.count();
+        return usersDAO.count();
     }
 
     @Override
     public Users getByPropertyName(String propertyName, String propertyValue) {
-                return usersDAO.getByPropertyName(propertyName, propertyValue);
+        return usersDAO.getByPropertyName(propertyName, propertyValue);
     }
 
     /**
@@ -96,7 +97,7 @@ public class UsersServiceImpl implements UsersService{
         Account account = new Account();
         account.setPinNumber(newpin2);
         accountService.merge(account);
-        
+
     }
 
     @Override
@@ -124,6 +125,20 @@ public class UsersServiceImpl implements UsersService{
         String password = pswGenerator.getStaticPassword();
         user.setPassword(PasswordFactory.EncryptPassword(password));
         usersDAO.merge(user);
-        
+
+    }
+
+    @Override
+    public void DisableUser(Users user) {
+        boolean Enabled = false;
+        user.setEnabled(Enabled);
+        usersDAO.merge(user);
+    }
+
+    @Override
+    public void EnableUser(Users user) {
+        boolean Enabled = true;
+        user.setEnabled(Enabled);
+        usersDAO.merge(user);
     }
 }
