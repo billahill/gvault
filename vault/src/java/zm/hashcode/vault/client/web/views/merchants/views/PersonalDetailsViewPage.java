@@ -142,52 +142,63 @@ public class PersonalDetailsViewPage extends VerticalLayout implements
 
     public void saveEdited(Form form) {
         boolean tmp = true;
-    
+
         try {
-        final Long id = Long.parseLong(form.getField("id").getValue().toString());
-        final Users u = data.getUsersService().find(id);
-        final String firstName = form.getField("firstname").getValue().toString();
-        final String lastName = form.getField("lastname").getValue().toString();
-        final String Title = form.getField("title").getValue().toString();
-        final String roleName = form.getField("rolename").getValue().toString();
-        final String otherName = form.getField("otherName").getValue().toString();
-        final String phoneNumber = form.getField("phoneNumber").getValue().toString();
-        final String cellnumber = form.getField("cellNumber").getValue().toString();
-        final String emailaddress = form.getField("emailAddress").getValue().toString();
-        final String faxnumber = form.getField("faxNumber").getValue().toString();
-        final String addressstatus = form.getField("addressStatus").getValue().toString();
-        final String postaladdress = form.getField("postalAddress").getValue().toString();
-        final String physicaladdress = form.getField("physicalAddress").getValue().toString();
-        final String postalCode = form.getField("postalcode").getValue().toString();
-        final String contactstatus = form.getField("contactStatus").getValue().toString();
-  
-        
-        //converting thing that dont need to be strings
-      
+            final Long id = Long.parseLong(form.getField("id").getValue().toString());
+            final Users u = data.getUsersService().find(id);
+            final String firstName = form.getField("firstname").getValue().toString();
+            final String lastName = form.getField("lastname").getValue().toString();
+            final String Title = form.getField("title").getValue().toString();
+            final String roleName = form.getField("rolename").getValue().toString();
+            final String otherName;
+            final String phoneNumber;
+            final String cellnumber = form.getField("cellNumber").getValue().toString();
+            final String emailaddress = form.getField("emailAddress").getValue().toString();
+            final String faxnumber;
+            final String addressstatus = form.getField("addressStatus").getValue().toString();
+            final String postaladdress = form.getField("postalAddress").getValue().toString();
+            final String physicaladdress = form.getField("physicalAddress").getValue().toString();
+            final String postalCode = form.getField("postalcode").getValue().toString();
+            final String contactstatus = form.getField("contactStatus").getValue().toString();
+            if (form.getField("otherName").isModified()) {
+                otherName = form.getField("otherName").getValue().toString();
+            } else {
+                otherName = "";
+            }
+
+            if (form.getField("phoneNumber").isModified()) {
+                phoneNumber = form.getField("phoneNumber").getValue().toString();
+                long longPhone = Long.parseLong(phoneNumber);
+            } else {
+                phoneNumber = "";
+            }
+
+            if (form.getField("faxNumber").isModified()) {
+                faxnumber = form.getField("faxNumber").getValue().toString();
+                long longFax = Long.parseLong(faxnumber);
+            } else {
+                faxnumber = "";
+            }
+
+            //converting thing that dont need to be strings
+
             int intPost = Integer.parseInt(postalCode);
             long longCell = Long.parseLong(cellnumber);
-            long longPhone = Long.parseLong(phoneNumber);
-            long longFax = Long.parseLong(faxnumber);
-            
-            if (tmp = true)
-            {
-            Edit(u ,firstName, lastName, roleName, otherName, phoneNumber ,cellnumber ,emailaddress,faxnumber, addressstatus,postaladdress,physicaladdress,postalCode,contactstatus,Title); 
+
+
+            if (tmp = true) {
+                Edit(u, firstName, lastName, roleName, otherName, phoneNumber, cellnumber, emailaddress, faxnumber, addressstatus, postaladdress, physicaladdress, postalCode, contactstatus, Title);
             }
-        }
-        catch (NullPointerException NullPoint )
-        {
+        } catch (NullPointerException NullPoint) {
             getWindow().showNotification("Data Missing", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
             tmp = false;
-        }
-        
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             getWindow().showNotification("You have put letters in for your numbers, ping and/or you postal code", "Please correct ", Notification.TYPE_ERROR_MESSAGE);
             tmp = false;
         }
     }
-    private void Edit(Users u ,String firstName, String lastName,String roleName,String otherName,String phoneNumber,String cellnumber, String emailaddress,String faxnumber,String addressstatus,String postaladdress,String physicaladdress,String postalCode,String contactstatus,String Title)
-    {
+
+    private void Edit(Users u, String firstName, String lastName, String roleName, String otherName, String phoneNumber, String cellnumber, String emailaddress, String faxnumber, String addressstatus, String postaladdress, String physicaladdress, String postalCode, String contactstatus, String Title) {
         Address address = new Address();
         address.setAddressStatus(addressstatus);
         address.setPhysicalAddress(physicaladdress);
@@ -209,17 +220,16 @@ public class PersonalDetailsViewPage extends VerticalLayout implements
         name.setOtherName(otherName);
         name.setTitle(Title);
         u.getName().setFirstname(firstName);
-            u.getName().setLastname(lastName);
-             u.getName().setOtherName(otherName);
-             u.getName().setTitle(Title);
-             u.getRoles().add(roles);
-             u.getAddress().add(address);
-             u.getContacts().add(cont);
+        u.getName().setLastname(lastName);
+        u.getName().setOtherName(otherName);
+        u.getName().setTitle(Title);
+        u.getRoles().add(roles);
+        u.getAddress().add(address);
+        u.getContacts().add(cont);
 
-            data.getUsersService().merge(u);
-        
+        data.getUsersService().merge(u);
+
     }
-    
 
     public void deleteUser(Form form) {
         final Long id = Long.parseLong(form.getField("id").getValue().toString());

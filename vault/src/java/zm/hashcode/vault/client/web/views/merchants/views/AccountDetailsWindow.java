@@ -73,7 +73,7 @@ public class AccountDetailsWindow extends Window {
         
         catch (Exception e)
         {
-            getWindow().showNotification("You have put letters in for your numbers, ping and/or you postal code", "Please correct ", Notification.TYPE_ERROR_MESSAGE);
+            getWindow().showNotification("You have put letters in for your pin and/or your account Number", "Please correct ", Notification.TYPE_ERROR_MESSAGE);
             
         }
     }

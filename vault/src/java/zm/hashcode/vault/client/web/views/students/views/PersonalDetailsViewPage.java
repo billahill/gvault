@@ -148,24 +148,49 @@ public class PersonalDetailsViewPage extends VerticalLayout implements
         final String lastName = form.getField("lastname").getValue().toString();
         final String Title = form.getField("title").getValue().toString();
         final String roleName = form.getField("rolename").getValue().toString();
-        final String otherName = form.getField("otherName").getValue().toString();
-        final String phoneNumber = form.getField("phoneNumber").getValue().toString();
+        final String otherName;
+        final String phoneNumber;
         final String cellnumber = form.getField("cellNumber").getValue().toString();
         final String emailaddress = form.getField("emailAddress").getValue().toString();
-        final String faxnumber = form.getField("faxNumber").getValue().toString();
+        final String faxnumber;
         final String addressstatus = form.getField("addressStatus").getValue().toString();
         final String postaladdress = form.getField("postalAddress").getValue().toString();
         final String physicaladdress = form.getField("physicalAddress").getValue().toString();
         final String postalCode = form.getField("postalcode").getValue().toString();
         final String contactstatus = form.getField("contactStatus").getValue().toString();
-
+if (form.getField("otherName").isModified())   
+             {
+                otherName= form.getField("otherName").getValue().toString();
+             } else
+             {
+                 otherName = "";
+             }
+        
+            if (form.getField("phoneNumber").isModified())
+            {
+            phoneNumber = form.getField("phoneNumber").getValue().toString();
+            long longPhone = Long.parseLong(phoneNumber);
+            }
+            else 
+            {
+                phoneNumber = "";
+            }
+           
+            if (form.getField("faxNumber").isModified())
+            {
+             faxnumber = form.getField("faxNumber").getValue().toString();
+             long longFax = Long.parseLong(faxnumber);
+            }            
+            else
+            {
+                faxnumber = "";
+            }
         
         //converting thing that dont need to be strings
       
             int intPost = Integer.parseInt(postalCode);
             long longCell = Long.parseLong(cellnumber);
-            long longPhone = Long.parseLong(phoneNumber);
-            long longFax = Long.parseLong(faxnumber);
+            
             
             if (tmp = true)
             {
@@ -180,7 +205,7 @@ public class PersonalDetailsViewPage extends VerticalLayout implements
         
         catch (Exception e)
         {
-            getWindow().showNotification("You have put letters in for your numbers, ping and/or you postal code", "Please correct ", Notification.TYPE_ERROR_MESSAGE);
+            getWindow().showNotification("You have put letters in for your Contact Numbers and/or you Postal Code", "Please correct ", Notification.TYPE_ERROR_MESSAGE);
             tmp = false;
         }
     }

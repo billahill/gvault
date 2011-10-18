@@ -143,7 +143,7 @@ public class ChangePasswordViewPage extends VerticalLayout implements
         
         catch (Exception e)
         {
-            getWindow().showNotification("You Have Encounted a Error Please Notify Admin Staff", "Thanks you", Notification.TYPE_ERROR_MESSAGE);
+            getWindow().showNotification("You Have Encounted a Erorr Please Notify Admin Staff", "Thank you", Notification.TYPE_ERROR_MESSAGE);
             
         }
     }

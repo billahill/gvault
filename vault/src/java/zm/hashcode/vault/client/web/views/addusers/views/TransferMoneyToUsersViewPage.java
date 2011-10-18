@@ -153,11 +153,20 @@ public class TransferMoneyToUsersViewPage extends VerticalLayout implements
         delete.setClosable(false);
         delete.setDraggable(false);
         delete.setCloseShortcut(KeyCode.ESCAPE, null);
-
+  
+        if (form.getField("credit").isModified()) {
         Label helpText = new Label(
                 "Are you sure you want to credit the user?",
                 Label.CONTENT_XHTML);
         delete.addComponent(helpText);
+        }
+        else
+        {
+           Label help = new Label(
+                "There is no Value in the Credit",
+                Label.CONTENT_DEFAULT);
+        delete.addComponent(help); 
+        }
 
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
@@ -165,10 +174,12 @@ public class TransferMoneyToUsersViewPage extends VerticalLayout implements
 
             @Override
             public void buttonClick(ClickEvent event) {
-                creditUser(form);
-                main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREDITUSER"));
-                main.getMainWindow().showNotification("USER CREDITED", "", Notification.DELAY_FOREVER);
-                main.getMainWindow().removeWindow(event.getButton().getWindow());
+                if (form.getField("credit").isModified()) {
+                    creditUser(form);
+                    main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREDITUSER"));
+                    main.getMainWindow().showNotification("USER CREDITED", "", Notification.DELAY_FOREVER);
+                    main.getMainWindow().removeWindow(event.getButton().getWindow());
+                }
             }
         });
         yes.setStyleName(Reindeer.BUTTON_DEFAULT);
@@ -206,7 +217,7 @@ public class TransferMoneyToUsersViewPage extends VerticalLayout implements
 
 
         } catch (NullPointerException NullPoint) {
-            getWindow().showNotification("Data Missing", "You have left some of the feilds out please full them all in", Notification.TYPE_ERROR_MESSAGE);
+            getWindow().showNotification("Data Missing", "Please fill in all the Box's", Notification.TYPE_ERROR_MESSAGE);
 
         } catch (Exception e) {
             getWindow().showNotification("Error Has occured, Error ", Notification.TYPE_ERROR_MESSAGE);
