@@ -4,6 +4,7 @@
  */
 package zm.hashcode.vault.infrastructure.factories.metadata;
 
+import java.util.Date;
 import zm.hashcode.vault.model.metadata.Reciept;
 
 /**
@@ -13,14 +14,19 @@ import zm.hashcode.vault.model.metadata.Reciept;
 public class RecieptFactory {
     public static class Builder {
 
-        private String rolename;
+        private double price;
+        private Date date;
 
-        public Builder(String rolename) {
-            this.rolename = rolename;
+        public Builder(double price) {
+            this.price = price;
         }
 
-        public Builder rolename(String rolename) {
-            this.rolename = rolename;
+        public Builder Price(double price) {
+            this.price = price;
+            return this;
+        }
+        public Builder Price(Date date) {
+            this.date = date;
             return this;
         }
 
@@ -30,7 +36,6 @@ public class RecieptFactory {
 
         private Reciept getReciept(Builder builder) {
             Reciept Reciept = new Reciept();
-            Reciept.setRolename(builder.rolename);
             return Reciept;
         }
     }

@@ -5,45 +5,42 @@
 package zm.hashcode.vault.model.metadata;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
 
 /**
  *
  * @author David
  */
 @Entity
-public class Reciept implements Serializable 
-{
+public class RecieptDetail implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateEntry;
-    private double Price;
-    
+    private String descript;
+    private double price;
+    private int qty;
+    private double total;
+    private Long Rid;
 
-    
-
-    public double getPrice() {
-        return Price;
+    public Long getRid() {
+        return Rid;
     }
 
-    public void setPrice(double Price) {
-        this.Price = Price;
+    public void setRid(Long Rid) {
+        this.Rid = Rid;
     }
 
-    public Date getDateEntry() {
-        return dateEntry;
+    public String getDescript() {
+        return descript;
     }
 
-    public void setDateEntry(Date dateEntry) {
-        this.dateEntry = dateEntry;
+    public void setDescript(String descript) {
+        this.descript = descript;
     }
 
     public Long getId() {
@@ -53,7 +50,31 @@ public class Reciept implements Serializable
     public void setId(Long id) {
         this.id = id;
     }
-    
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -64,10 +85,10 @@ public class Reciept implements Serializable
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Reciept)) {
+        if (!(object instanceof RecieptDetail)) {
             return false;
         }
-        Reciept other = (Reciept) object;
+        RecieptDetail other = (RecieptDetail) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -78,5 +99,4 @@ public class Reciept implements Serializable
     public String toString() {
         return "zm.hashcode.vault.model.MetaData.Reciept[ id=" + id + " ]";
     }
-    
 }

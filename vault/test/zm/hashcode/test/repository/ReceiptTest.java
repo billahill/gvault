@@ -22,11 +22,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  * @author David
  */
-public class RecieptDAOTest {
+public class ReceiptTest {
     private static Long recieptId;
     private RecieptDAO recieptDAO;
     private static ApplicationContext ctx;
-    public RecieptDAOTest() {
+    public ReceiptTest() {
         
     }
 
@@ -50,7 +50,7 @@ public class RecieptDAOTest {
     @Test
     public void createReciept100() {
         recieptDAO = (RecieptDAO) ctx.getBean("recieptDAO");
-        Reciept reciept = new RecieptFactory.Builder("Test").build();
+        Reciept reciept = new RecieptFactory.Builder(123.12).build();
         recieptDAO.persist(reciept);
         recieptId = reciept.getId();
         Assert.assertNotNull(reciept.getId());
@@ -60,17 +60,17 @@ public class RecieptDAOTest {
     public void testRead200() {
         recieptDAO = (RecieptDAO) ctx.getBean("recieptDAO");
         Reciept reciept = recieptDAO.find(recieptId);
-        Assert.assertEquals("Test", reciept.getDisc());
+        Assert.assertEquals(123.12, reciept.getPrice());
     }
 
     @Test
     public void testUpdate300() {
         recieptDAO = (RecieptDAO) ctx.getBean("recieptDAO");
         Reciept reciept = recieptDAO.find(recieptId);
-        reciept.setDisc("SAVINGS");
+        reciept.setPrice(123.12);
         recieptDAO.merge(reciept);
         Reciept accType = recieptDAO.find(recieptId);
-        Assert.assertEquals("SAVINGS", reciept.getDisc());
+        Assert.assertEquals(123.12, reciept.getPrice());
     }
 
     @Test
@@ -91,7 +91,7 @@ public class RecieptDAOTest {
     public void testGetByParamater600() {
         recieptDAO = (RecieptDAO) ctx.getBean("recieptDAO");
         Reciept Reciept = recieptDAO.getByPropertyName("reciept", "SAVINGS");
-        Assert.assertEquals("SAVINGS", Reciept.getDisc());
+        Assert.assertEquals(123.12, Reciept.getPrice());
 
     }
 
