@@ -21,12 +21,9 @@ public class RecieptDetailFactory {
         private double total;
         private Long rid;
         
-        public Builder(double price, int qty, double total, Long rid, String descript) {
+        public Builder(double price) {
             this.price = price;
-             this.qty = qty;
-             this.rid = rid;
-             this.total = total;
-             this.descript = descript;                     
+                                
         }
         
         public Builder Price(double price) {
@@ -57,8 +54,15 @@ public class RecieptDetailFactory {
         }
 
         private RecieptDetail getReciept(Builder builder) {
-            RecieptDetail recieptDetail = new RecieptDetail();
-            return recieptDetail;
+            RecieptDetail r = new RecieptDetail();
+            r.setDescript(builder.descript);
+            r.setPrice(builder.price);
+            r.setQty(builder.qty);
+            r.setRid(builder.rid);
+            r.setTotal(builder.total);
+            
+            
+            return r;
         }
     }
     

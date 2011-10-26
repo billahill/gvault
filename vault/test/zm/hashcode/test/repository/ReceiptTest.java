@@ -50,7 +50,7 @@ public class ReceiptTest {
     @Test
     public void createReciept100() {
         recieptDAO = (RecieptDAO) ctx.getBean("recieptDAO");
-        Reciept reciept = new RecieptFactory.Builder(123.12).build();
+        Reciept reciept = new RecieptFactory.Builder(123.12).Date(null).build();
         recieptDAO.persist(reciept);
         recieptId = reciept.getId();
         Assert.assertNotNull(reciept.getId());
@@ -69,7 +69,6 @@ public class ReceiptTest {
         Reciept reciept = recieptDAO.find(recieptId);
         reciept.setPrice(123.12);
         recieptDAO.merge(reciept);
-        Reciept accType = recieptDAO.find(recieptId);
         Assert.assertEquals(123.12, reciept.getPrice());
     }
 

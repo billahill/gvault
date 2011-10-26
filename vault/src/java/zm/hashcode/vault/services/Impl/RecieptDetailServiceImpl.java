@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zm.hashcode.vault.model.metadata.Reciept;
 import zm.hashcode.vault.model.metadata.RecieptDetail;
 import zm.hashcode.vault.repository.jpa.metadata.RecieptDetailDAO;
 import zm.hashcode.vault.services.metadata.RecieptDetailService;
@@ -17,7 +16,7 @@ import zm.hashcode.vault.services.metadata.RecieptDetailService;
  *
  * @author David
  */
-@Service("recieptDetialService")
+@Service("recieptDetailService")
 @Transactional
 public class RecieptDetailServiceImpl  implements RecieptDetailService{
     

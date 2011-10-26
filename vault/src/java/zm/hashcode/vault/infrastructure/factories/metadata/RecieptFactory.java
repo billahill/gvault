@@ -25,7 +25,7 @@ public class RecieptFactory {
             this.price = price;
             return this;
         }
-        public Builder Price(Date date) {
+        public Builder Date(Date date) {
             this.date = date;
             return this;
         }
@@ -35,8 +35,10 @@ public class RecieptFactory {
         }
 
         private Reciept getReciept(Builder builder) {
-            Reciept Reciept = new Reciept();
-            return Reciept;
+            Reciept R = new Reciept();
+            R.setPrice(builder.price);
+            R.setDateEntry(builder.date);
+            return R;
         }
     }
 }

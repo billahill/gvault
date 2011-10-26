@@ -2,37 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package zm.hashcode.test.repository;
+package zm.hashcode.test.service;
 
-import org.junit.Ignore;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
-import org.springframework.context.ApplicationContext;
 import junit.framework.Assert;
-import zm.hashcode.vault.model.metadata.RecieptDetail;
-import zm.hashcode.vault.infrastructure.factories.metadata.RecieptDetailFactory;
-import zm.hashcode.vault.infrastructure.factories.metadata.RecieptFactory;
-
-import zm.hashcode.vault.repository.jpa.metadata.RecieptDetailDAO;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.springframework.context.ApplicationContext;
+import zm.hashcode.vault.infrastructure.factories.metadata.RecieptDetailFactory;
+import zm.hashcode.vault.model.metadata.RecieptDetail;
+import zm.hashcode.vault.services.metadata.RecieptDetailService;
 
 /**
  *
  * @author David
  */
-public class RecieptDetailTest {
-
+public class RecieptService {
     private static Long recieptDetailId;
-    private RecieptDetailDAO recieptDetailDAO;
+    private RecieptDetailService recieptDetailService;
     private static ApplicationContext ctx;
-
-    public RecieptDetailTest() {
+    public RecieptService() {
     }
+
+     
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -53,65 +49,62 @@ public class RecieptDetailTest {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    // @Test
-    // public void hello() {}
 
     @Test
     public void createReciept100() {
-        recieptDetailDAO = (RecieptDetailDAO) ctx.getBean("recieptDetailDAO");
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
         String str = "1";
         Long bob = Long.parseLong(str);
         RecieptDetail reciept = new RecieptDetailFactory.Builder(123.12).Price(123.12).Qty(1).Rid(bob).Total(123.12).descript("hello").build();
-        recieptDetailDAO.persist(reciept);
+        recieptDetailService.persist(reciept);
         recieptDetailId = reciept.getId();
         Assert.assertNotNull(reciept.getId());
     }
 
     @Test
     public void testRead200() {
-        recieptDetailDAO = (RecieptDetailDAO) ctx.getBean("recieptDetailDAO");
-        RecieptDetail reciept = recieptDetailDAO.find(recieptDetailId);
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
+        RecieptDetail reciept = recieptDetailService.find(recieptDetailId);
         Assert.assertEquals(123.12, reciept.getPrice());
     }
 
     @Test
     public void testUpdate300() {
-        recieptDetailDAO = (RecieptDetailDAO) ctx.getBean("recieptDetailDAO");
-        RecieptDetail recieptDetail = recieptDetailDAO.find(recieptDetailId);
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
+        RecieptDetail recieptDetail = recieptDetailService.find(recieptDetailId);
         recieptDetail.setPrice(123.12);
-        recieptDetailDAO.merge(recieptDetail);
+        recieptDetailService.merge(recieptDetail);
         Assert.assertEquals(123.12, recieptDetail.getPrice());
     }
 
     @Test
     public void testCount400() {
-        recieptDetailDAO = (RecieptDetailDAO) ctx.getBean("recieptDetailDAO");
-        Long count = recieptDetailDAO.count();
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
+        Long count = recieptDetailService.count();
         Assert.assertEquals(new Long(0), count);
     }
 
     @Test
     public void testList500() {
-        recieptDetailDAO = (RecieptDetailDAO) ctx.getBean("recieptDetailDAO");
-        List<RecieptDetail> roles = recieptDetailDAO.findAll();
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
+        List<RecieptDetail> roles = recieptDetailService.findAll();
         Assert.assertTrue(roles.size() >= 0);
     }
 
     @Test
     public void testGetByParamater600() {
-        recieptDetailDAO = (RecieptDetailDAO) ctx.getBean("recieptDetailDAO");
-        RecieptDetail recieptDetail = recieptDetailDAO.getByPropertyName("descript", "hello");
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
+        RecieptDetail recieptDetail = recieptDetailService.getByPropertyName("descript", "hello");
         Assert.assertEquals("hello", recieptDetail.getDescript());
 
     }
 
     @Test
     public void testDelete700() {
-        recieptDetailDAO = (RecieptDetailDAO) ctx.getBean("recieptDetailDAO");
-        RecieptDetail currency = recieptDetailDAO.find(recieptDetailId);
-        recieptDetailDAO.remove(currency);
-        RecieptDetail r = recieptDetailDAO.find(recieptDetailId);
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
+        RecieptDetail currency = recieptDetailService.find(recieptDetailId);
+        recieptDetailService.remove(currency);
+        RecieptDetail r = recieptDetailService.find(recieptDetailId);
         Assert.assertNull(r);
-
     }
 }
