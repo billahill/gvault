@@ -1,0 +1,56 @@
+/*
+    Document   : layout
+    Created on : 30 Aug 2011, 3:16:53 AM
+    Author     : Nji Enwe
+    Description: Main ui style for Edutain(E2) Admin Application.
+                 Style applied in baseLayout.jsp
+*/
+
+body {
+	margin: 0px auto; /* tres tres important*/
+/*	font: 13px "Tahoma";*/
+        color: blue;
+/*        background-color: red;*/
+}
+
+.mainFrame {
+	margin:0px auto; /* tres tres important*/
+	width:600px;
+	height: 520px;  /* set later to "auto" */
+        border: 1px solid blue;
+}
+
+.header{
+    float: left;
+    width: 595px;
+    height: 100px;
+    border: 1px solid brown;
+}
+
+.menuPage{
+    float: left;
+    width: 595px;
+    height: 300px; /* set later to "auto" */
+    border-left: 1px solid brown;
+    border-right: 1px solid brown;
+}
+
+.menu{
+    float: left;
+    width: 160px;
+    height: 300px; /* set later to "auto" */
+    border-right: 1px solid brown;
+}
+
+.page{
+    float: left;
+    width: 336px;
+    height: 300px; /* set later to "auto" */
+}
+
+.footer{
+    float: left;
+    width: 595px;
+    height: 100px;
+    border: 1px solid brown;
+}
