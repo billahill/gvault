@@ -61,7 +61,7 @@ public class UsersTest {
                 contactStatus("CURRENT").emailAddress("current@gmail.com").
                 faxNumber("0218938393").otherName("Lukas").
                 phoneNumber("921921912").physicalAddress("20 Chanda Mali Close").postalAddress("P.O.Box 23487").postalcode("7654").
-                rolename("STUDENT").title("MR").username("john@john.com").enabled(true).password("test123").build();
+                rolename("STUDENT").title("MR").username("carlos@john.com").enabled(true).password("test123").build();
         Account account = new AccountFactory.Builder("07313013949", "115544").accountType("savings").build();
         user.setAccount(account);
         usersDAO.persist(user);
