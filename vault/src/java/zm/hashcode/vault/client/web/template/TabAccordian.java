@@ -35,14 +35,14 @@ public class TabAccordian extends Accordion {
 
         //Configure Manage People Menu
         VerticalLayout studentLayout = new VerticalLayout();
-        StudentTreeMenu studentTree = new StudentTreeMenu(main);
+        StudentTreeMenu studentTree = new StudentTreeMenu(app);
         studentLayout.addComponent(studentTree);
 
         addTab(studentLayout, STUDENT_ACCOUNT, null);
 
         // Manage Courses
         VerticalLayout merchantLayout = new VerticalLayout();
-        MerchantTreeMenu mechantTree = new MerchantTreeMenu (main);
+        MerchantTreeMenu mechantTree = new MerchantTreeMenu (app);
         merchantLayout.addComponent(mechantTree);
         addTab(merchantLayout, MERCHANT, null);
 
@@ -55,7 +55,14 @@ public class TabAccordian extends Accordion {
             addTab(adminLayout, ADMIN, null);
         }
 
-        
+          if (new GetUserCredentials().isUserWithRole("MERCHANT")) {
+            addTab(merchantLayout, MERCHANT, null);
+        }
+
+          if (new GetUserCredentials().isUserWithRole("STUDENT")) {
+            addTab(studentLayout, STUDENT_ACCOUNT, null);
+        }
+
 
    
     }

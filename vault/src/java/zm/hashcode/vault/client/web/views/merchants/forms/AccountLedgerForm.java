@@ -13,6 +13,7 @@ import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,9 @@ public class AccountLedgerForm {
     private static final String COMMON_FIELD_WIDTH ="20em";    
     private GridLayout layout;
     //Define Footer
+    private Long selectedItemId;
     private HorizontalLayout footer;
-
+    
     public AccountLedgerForm() {
     }
 
@@ -46,8 +48,9 @@ public class AccountLedgerForm {
 
         footer = new HorizontalLayout();
         footer.setSpacing(true);
+        //footer.addComponent(table);
         footer.addComponent(add);
-        footer.addComponent(cancel);
+        footer.addComponent(cancel);        
         footer.setVisible(true);
         footer.setMargin(true);
         // Determines which properties are shown, and in which order:
@@ -59,9 +62,9 @@ public class AccountLedgerForm {
 
     public List orderList() {
         final List order = new ArrayList();        
-        order.add("dateEntry");
+        /*order.add("dateEntry");
         order.add("description");
-        order.add("debit");
+        order.add("debit");*/
         order.add("accountId");
         return order;
     }

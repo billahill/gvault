@@ -4,6 +4,7 @@
  */
 package zm.hashcode.test.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import junit.framework.Assert;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import zm.hashcode.vault.infrastructure.factories.metadata.RecieptDetailFactory;
 import zm.hashcode.vault.model.metadata.RecieptDetail;
+import zm.hashcode.vault.services.Impl.RecieptDetailServiceImpl;
 import zm.hashcode.vault.services.metadata.RecieptDetailService;
 import zm.hashcode.vault.services.metadata.RecieptDetailService;
 
@@ -107,5 +109,15 @@ public class RecieptServiceTest {
         recieptDetailService.remove(currency);
         RecieptDetail r = recieptDetailService.find(recieptDetailId);
         Assert.assertNull(r);
+    }
+    
+    @Test
+    public void testInsertRid(){
+        recieptDetailService = (RecieptDetailService) ctx.getBean("recieptDetailService");
+        RecieptDetail receipt = recieptDetailService.find(recieptDetailId);
+        String str = "21";
+        Long bob = Long.parseLong(str);
+        receipt.setRid(bob);
+        Assert.assertEquals(recieptDetailId, receipt.getRid());
     }
 }

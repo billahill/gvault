@@ -18,6 +18,8 @@
     <class>zm.hashcode.vault.model.account.Account</class>
     <class>zm.hashcode.vault.model.account.AccountLedger</class>
     <class>zm.hashcode.vault.model.metadata.AccountTypeList</class>
+    <class>zm.hashcode.vault.model.product.product</class>
+    <class>zm.hashcode.vault.model.parameters.settings</class>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties/>
   </persistence-unit>

@@ -11,16 +11,12 @@ import org.springframework.context.ApplicationContext;
 import junit.framework.Assert;
 import zm.hashcode.vault.model.metadata.RecieptDetail;
 import zm.hashcode.vault.infrastructure.factories.metadata.RecieptDetailFactory;
-import zm.hashcode.vault.infrastructure.factories.metadata.RecieptFactory;
-
 import zm.hashcode.vault.repository.jpa.metadata.RecieptDetailDAO;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-
 /**
  *
  * @author David

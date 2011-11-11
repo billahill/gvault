@@ -52,8 +52,8 @@ public class MerchantMenuView extends VerticalLayout {
         tab = new TabSheet();
         tab.setHeight("100%");
         tab.setWidth("100%");
-
-
+        
+        
         tab.addTab(personalDetailsTab, "Personal Details", null);
         tab.addTab(changePasswordTab, "Change Password", null);
         tab.addTab(accountLedger, "Point Of Sale", null);
@@ -67,7 +67,7 @@ public class MerchantMenuView extends VerticalLayout {
         }
         addComponent(tab);
     }
-
+    
     private void promptUser() {
         // Create the window...
         final Window subwindow = new Window("Reason for ending careplan");

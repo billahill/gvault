@@ -82,9 +82,9 @@ public class ManageAccountUserViewPage extends VerticalLayout implements
     public void buttonClick(ClickEvent event) {
         final Button source = event.getButton();
         if (source == manageUsersFrom.getSave()) {
-//            saveNewUser(form);            
-//            main.getMainWindow().showNotification("USER CREATED", "", Notification.DELAY_FOREVER);
-//            main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREATEUSER"));
+ //           saveNewUser(form);            
+ //           main.getMainWindow().showNotification("USER CREATED", "", Notification.DELAY_FOREVER);
+ //           main.mainView.setSecondComponent(new UsersAdminMenuView(main, "CREATEUSER"));
         } else if (source == manageUsersFrom.getEdit()) {
             form.setReadOnly(false);
             manageUsersFrom.getSave().setVisible(false);

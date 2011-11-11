@@ -10,6 +10,7 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
 import zm.hashcode.vault.client.web.VaultMain;
 import zm.hashcode.vault.client.web.views.merchants.MerchantMenuView;
+import zm.hashcode.vault.client.web.views.merchants.MerchantProductView;
 
 /**
  *
@@ -21,12 +22,14 @@ public class MerchantTreeMenu extends Tree implements ItemClickListener {
     public static final Object SEARCH_FOR_PERSON = "People";
     public static final Object ADD_NEW_PERSON = "Merchant";
     public static final Object LIST_ALL_PEOPLE = "List All People";
+    public static final Object Products = "Product";
 
     public MerchantTreeMenu(VaultMain app) {
         this.main = app;
 
         //add Items to Menu
         addItem(ADD_NEW_PERSON);
+        addItem(Products);
 //        addItem(SEARCH_FOR_PERSON);
 //        addItem(LIST_ALL_PEOPLE);
 
@@ -45,6 +48,8 @@ public class MerchantTreeMenu extends Tree implements ItemClickListener {
                // managePositionsView();
             } else if (LIST_ALL_PEOPLE.equals(itemId)) {
                // organisationListView();
+            }else if (Products.equals(itemId)){
+               ProductView(); 
             }
         }
 
@@ -55,6 +60,10 @@ public class MerchantTreeMenu extends Tree implements ItemClickListener {
     private void managePeopleView() {
         main.mainView.setSecondComponent( new MerchantMenuView(main, "SEARCH"));
     }
-
-   
+    
+    private void ProductView()
+    {
+        main.mainView.setSecondComponent( new MerchantProductView(main,"SEARCH"));
+        
+    }  
 }

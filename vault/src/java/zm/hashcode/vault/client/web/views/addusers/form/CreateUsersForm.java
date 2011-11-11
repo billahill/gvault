@@ -45,8 +45,10 @@ public class CreateUsersForm {
         layout = new GridLayout(3, 10);
         layout.setMargin(false, true, false, true);
         layout.setSpacing(true);
+        
         form.setCaption(" Create Users ");
         form.setImmediate(false);
+        
         form.setFormFieldFactory(new UsersFieldFactory());
         form.setLayout(layout);
         // Add Listeners
