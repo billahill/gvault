@@ -118,7 +118,7 @@ public class UsersFactory {
         }
 
         public Builder title(String title) {
-            this.title = rolename;
+            this.title = title;
             return this;
         }
 

@@ -175,10 +175,10 @@ EmailValidator validate = new EmailValidator();
 
     private void SaveUser(String firstName, String lastName, String Password, String userName, String userTitle, String roleName, String otherName, String phoneNumber, String cellnumber, String emailaddress, String faxnumber, String addressstatus, String postaladdress, String physicaladdress, String postalCode, String contactstatus, String account, String pin, String type) {
         final Users user = new UsersFactory.Builder(firstName, lastName).password(Password).
-                enabled(true).username(userName).title(userTitle).rolename(roleName).otherName(otherName).
+                enabled(true).username(userName).rolename(roleName).otherName(otherName).
                 phoneNumber(phoneNumber).cellNumber(cellnumber).emailAddress(emailaddress).
                 faxNumber(faxnumber).addressStatus(addressstatus).postalAddress(postaladdress).
-                physicalAddress(physicaladdress).postalcode(postalCode).contactStatus(contactstatus).build();
+                physicalAddress(physicaladdress).postalcode(postalCode).contactStatus(contactstatus).title(userTitle).build();
         final Account userAccount = new AccountFactory.Builder(account, pin).accountType(type).build();
         user.setAccount(userAccount);
         data.getUsersService().persist(user);

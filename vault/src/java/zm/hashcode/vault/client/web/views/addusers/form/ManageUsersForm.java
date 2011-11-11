@@ -208,7 +208,7 @@ public class ManageUsersForm {
                 ((TextField) field).setNullRepresentation("");
                 ((TextField) field).setRequired(true);
                 ((TextField) field).setRequiredError("Please Enter Value");
-            }else if ("otheName".equals(propertyId)) {
+            }else if ("otherName".equals(propertyId)) {
                 field = new TextField("Other Name:");
                 ((TextField) field).setWidth(COMMON_FIELD_WIDTH);
                 ((TextField) field).setNullRepresentation("");
