@@ -38,22 +38,25 @@ public class TabAccordian extends Accordion {
         StudentTreeMenu studentTree = new StudentTreeMenu(app);
         studentLayout.addComponent(studentTree);
 
-        addTab(studentLayout, STUDENT_ACCOUNT, null);
+        
 
         // Manage Courses
         VerticalLayout merchantLayout = new VerticalLayout();
         MerchantTreeMenu mechantTree = new MerchantTreeMenu (app);
         merchantLayout.addComponent(mechantTree);
-        addTab(merchantLayout, MERCHANT, null);
+        
 
         // Niamrt Details 
         VerticalLayout adminLayout = new VerticalLayout();
         AdminTreeMenu adminTree = new AdminTreeMenu(app);
         adminLayout.addComponent(adminTree);
         
-        if (new GetUserCredentials().isUserWithRole("ADMIN")) {
+        //if (new GetUserCredentials().isUserWithRole("ADMIN")) {
             addTab(adminLayout, ADMIN, null);
-        }
+        //}
+        // if (new GetUserCredentials().isUserWithRole("MERCHANT")) {
+            addTab(merchantLayout, MERCHANT, null);
+       // }
 
           if (new GetUserCredentials().isUserWithRole("MERCHANT")) {
             addTab(merchantLayout, MERCHANT, null);

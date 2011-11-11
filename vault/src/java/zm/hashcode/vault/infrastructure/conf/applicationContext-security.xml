@@ -14,6 +14,7 @@
 
     <http auto-config="true">        	
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <form-login login-page="/login.jsp" />
     </http>
     <authentication-manager alias="authenticationManager">
         <authentication-provider>
