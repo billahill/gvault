@@ -12,15 +12,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-        <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script> 
+        <title>Login Page</title>
+        
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+      <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+      <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
     </head>
     <body>
-        <div data-role="header">
+        
             <!-- begin first page -->
             <section id="page1" data-role="page"  data-theme="b">
+            <div data-role="header"><h1>Wecome To GVault</h1></div>
                 <form action="j_spring_security_check">
                     <div data-role="fieldcontain">
                     <label for="j_username">Username:</label>
@@ -32,9 +34,9 @@
                     <input type="submit" value="Login" data-role="button" data-theme="c" data-inline="true"/>
                     </div>
                 </form>
-                <footer data-role="footer"><h1>Vault</h1></footer>
+                <footer data-role="footer"><h1> </h1></footer>
             </section>
             <!-- end first page -->
-        </div>
+        
     </body>
 </html>
