@@ -1,7 +1,3 @@
-<%-- 
-    Document   : main
-    Author     : David
---%>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -148,7 +144,7 @@
                 <h1>Make Payments</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content">  
+            <div data-role="content"> 
                 <h1 align="center">Payments to Make</h1>
                 <table id="makeTable" class="tablesorter">
                     <table border="2" bordercolor="#48A299">
@@ -185,8 +181,8 @@
                 <h1>Cancel Payments</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content">
-                <h1 align="center">Balances</h1>   
+            <div data-role="content">   
+                <h1 align="center">Balances</h1>
                 <table id="cancelTable" class="tablesorter">
                     <table border="2" bordercolor="#48A299">
                         <thead>
@@ -264,8 +260,8 @@
                 <h1>View Payments</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content">
-                <h1 align="center"> Payments Made</h1>   
+            <div data-role="content"> 
+                <h1 align="center"> Payments Made</h1>
                 <table id="paymentTable" class="tablesorter">
                     <table border="2" bordercolor="#48A299">
                         <thead>
