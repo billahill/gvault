@@ -11,14 +11,15 @@
 
     <global-method-security secured-annotations="enabled">
     </global-method-security>
-
     <http auto-config="true">        	
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <form-login login-page="/login.jsp" />
+        <intercept-url pattern="/main.htm" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <form-login login-page="/login.html" default-target-url="/main.html"/>
     </http>
+
     <authentication-manager alias="authenticationManager">
         <authentication-provider>
-            <password-encoder hash="md5"/>
+           <password-encoder hash="md5"/>
             <jdbc-user-service  data-source-ref="dataSource" 
                                 users-by-username-query="SELECT username, password, enabled FROM Users u where u.username=?"
                                 authorities-by-username-query="SELECT u.username, r.rolename FROM Users u, Roles r

@@ -18,7 +18,7 @@
     <body> 
 <div data-role="page">
    <div data-role="header">
-   <a href="http://localhost:8084/vault/home.html" data-icon="home">Home</a>
+   <a href="http://localhost:8084/vault/main.html" data-icon="home">Home</a>
       <h1>About Us</h1>
    <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
    </div><!-- /header -->

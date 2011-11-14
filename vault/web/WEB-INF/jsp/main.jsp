@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-        <style>
+    <!--    <style>
 
             table
             {
@@ -100,17 +100,18 @@
                 color: #797268;
             }
 
-        </style>
+        </style>-->
         <title>Main</title>
-        <link rel="stylesheet" href="Jquery/jm.css" />
+       <!-- <link rel="stylesheet" href="Jquery/jm.css" />
         <script type="text/javascript" src="Jquery/jq.min.js"></script>
         <script type="text/javascript" src="Jquery/jm.js"></script>
         <script type="text/javascript" src="Jquery/tablesort.min.js"></script>
-        <script type = "text/javascript">  
+        <script type = "text/javascript">  -->
     
+	     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+      <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+      <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 	
-	
-        </script>
     </head>
 
 

@@ -22,8 +22,8 @@
         
             <!-- begin first page -->
             <section id="page1" data-role="page"  data-theme="b">
-            <div data-role="header"><h1>Wecome To GVault</h1></div>
-                <form action="j_spring_security_check">
+            <div data-role="header"><h1>Welcome To Vault</h1></div>
+                <form action="j_spring_security_check" method="POST">
                     <div data-role="fieldcontain">
                     <label for="j_username">Username:</label>
                     <input type="text" name="j_username" id="j_username" <c:if test="${not empty param.login_error}">value='<%= session.getAttribute(AbstractAuthenticationProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY)%>'</c:if>/>
