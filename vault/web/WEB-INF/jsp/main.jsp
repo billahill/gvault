@@ -320,7 +320,11 @@
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
             <div data-role="content">   
-                Screen for Navigation Two
+                <p> Old Password<input id ="old" type = "text" /> 
+                    New Password<input id ="new" type = "text" /></p>
+                <center><a data-role="button" data-theme="c" data-inline="true">Sign in</a>
+                    <span id = "saveStatus"></span>
+                   
             </div><!-- /content -->
             <div data-role="footer">
                 <h4> </h4>
