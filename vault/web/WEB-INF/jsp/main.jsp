@@ -116,14 +116,14 @@
 
 
     <body> 
-        <div data-role="page" id= "main">
+        <div data-role="page" id= "main" data-theme="b">
             <div data-role="header" data-position="inline">
                 <a href="http://localhost:8084/vault/aboutus.html" data-icon="about">About Us</a>
-                <h1>GVault</h1>
+                <h1>Vault</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content" >
-                <ul data-role="listview" data-dividertheme="a" style="margin-top: 0;">
+            <div data-role="content" data-theme="b">
+                <ul data-role="listview" data-dividertheme="b" style="margin-top: 0;">
                     <li data-role="list-divider">Payment</li>
                     <li><a href="#make">Make Payment<span class="ui-li-count">One Remaining</span></a></li>
                     <li><a href="#cancel">Cancel Payment</a></li>
@@ -139,13 +139,13 @@
 
 
 
-        <div data-role="page" id="make">
+        <div data-role="page" id="make" data-theme="b">
             <div data-role="header">
                 <a href="#main" data-icon="back">Back</a>
                 <h1>Make Payments</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content"> 
+            <div data-role="content" data-theme="b"> 
                 <h1 align="center">Payments to Make</h1>
                 <table id="makeTable" class="tablesorter">
                     <table border="2" bordercolor="#48A299">
@@ -176,13 +176,13 @@
 
 
 
-        <div data-role="page" id="cancel" data-position="inline">
+        <div data-role="page" id="cancel" data-position="inline" data-theme="b">
             <div data-role="header">
                 <a href="#main" data-icon="back">Back</a>
                 <h1>Cancel Payments</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content">   
+            <div data-role="content" data-theme="b">   
                 <h1 align="center">Balances</h1>
                 <table id="cancelTable" class="tablesorter">
                     <table border="2" bordercolor="#48A299">
@@ -210,14 +210,14 @@
             </div><!-- /footer -->
         </div><!-- /page -->
 
-        <div data-role="page" id="balance">
+        <div data-role="page" id="balance" data-theme="b">
             <div data-role="header">
                 <a href="#main" data-icon="back">Back</a>
                 <h1>Cancel Payments</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
 
-            <div data-role="content">
+            <div data-role="content" data-theme="b">
                 <h1 align="center">View Balances</h1>
                 <table id="balanceTable" class="tablesorter">
                     <table border="2" bordercolor="#48A299">
@@ -255,13 +255,13 @@
             </div><!-- /footer -->
         </div><!-- /page -->
 
-        <div data-role="page" id="payments">
+        <div data-role="page" id="payments" data-theme="b">
             <div data-role="header">
                 <a href="#main" data-icon="back">Back</a>
                 <h1>View Payments</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content"> 
+            <div data-role="content" data-theme="b"> 
                 <h1 align="center"> Payments Made</h1>
                 <table id="paymentTable" class="tablesorter">
                     <table border="2" bordercolor="#48A299">
@@ -314,13 +314,13 @@
             </div><!-- /footer -->
         </div><!-- /page -->
 
-        <div data-role="page" id="pin">
+        <div data-role="page" id="pin" data-theme="b">
             <div data-role="header">
                 <a href="#main" data-icon="back">Back</a>
                 <h1>Change Pin</h1>
                 <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             </div><!-- /header -->
-            <div data-role="content">   
+            <div data-role="content" data-theme="b">   
                 <p> Old Password<input id ="old" type = "text" /> 
                     New Password<input id ="new" type = "text" /></p>
                 <center><a data-role="button" data-theme="c" data-inline="true">Sign in</a>
