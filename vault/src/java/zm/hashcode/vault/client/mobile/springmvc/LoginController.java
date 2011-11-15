@@ -18,18 +18,11 @@ public class LoginController extends AbstractController {
  
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-                //List<Users> users = data.getUsersService().findAll();
+
                 String firstname="Couldn't find user";
-//                for (Users u : users) {
-//                    if(u.getUsername().equals("carlos@john.com")){
-//                        firstname = u.getName().getFirstname();
-//                    }
-//        }
-		
- 
 		ModelAndView modelAndView = new ModelAndView("login");
 		modelAndView.addObject("message", firstname);
- 
+
 		return modelAndView;
     }
 }
