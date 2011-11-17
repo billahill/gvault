@@ -1,9 +1,8 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Untitled Document</title>
         <style>
 
             table
@@ -99,51 +98,50 @@
             }
 
         </style>
-        <title>Main</title>
+        <title>Balances</title>
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
         <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
         <script type="text/javascript" src="Jquery/tablesort.min.js"></script>
+
     </head>
     <body>
-
         <div data-role="header">
             <a href="http://localhost:8084/vault/main.html" data-icon="back">Back</a>
             <h1>View Balances</h1>
             <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
         </div><!-- /header -->
 
-
-        <table id="balanceTable" class="tablesorter" border ="1" bordercolor="#48A299">
+        <div data-role ="content">
             <h1 align="center">Balances</h1>
+            <table id="balanceTable" class="tablesorter" border ="1" bordercolor="#48A299">
+                <thead>
 
-            <thead>
+                    <tr>
+                        <th >Date</th>
+                        <th >Ammount Withdrawn</th>
+                        <th>Ammount Added</th>
+                        <th>Availble</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10 March 2011</td>
+                        <td></td>
+                        <td>R45.00</td>
+                        <td>R45.00</td>
 
-                <tr>
-                    <th >Date</th>
-                    <th >Ammount Withdrawn</th>
-                    <th>Ammount Added</th>
-                    <th>Availble</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>10 March 2011</td>
-                    <td></td>
-                    <td>R45.00</td>
-                    <td>R45.00</td>
+                    </tr>
+                    <tr>
+                        <td>15 March 2011</td>
+                        <td>R35.00</td>
+                        <td></td>
+                        <td>R10.00</td>
 
-                </tr>
-                <tr>
-                    <td>15 March 2011</td>
-                    <td>R35.00</td>
-                    <td></td>
-                    <td>R10.00</td>
-
-                </tr>
-            </tbody>
-        </table>
-
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
 
         <div data-role="footer">

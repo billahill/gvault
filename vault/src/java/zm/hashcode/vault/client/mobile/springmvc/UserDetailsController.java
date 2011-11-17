@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
  *
  * @author David
  */
-public class ViewBalance extends AbstractController {
+public class UserDetailsController extends AbstractController {
  
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
@@ -27,7 +27,7 @@ public class ViewBalance extends AbstractController {
 //        }
 		
  
-		ModelAndView modelAndView = new ModelAndView("balance");
+		ModelAndView modelAndView = new ModelAndView("userdetials");
 		modelAndView.addObject("message", firstname);
  
 		return modelAndView;

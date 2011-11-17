@@ -7,20 +7,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-    <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
-    <script type="text/javascript" src="Jquery/tablesort.min.js"></script>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+        <script type="text/javascript" src="Jquery/tablesort.min.js"></script>
 
 
-
+    </head>
     <body>
         <div data-role="header">
             <a href="http://localhost:8084/vault/main.html" data-icon="back">Back</a>
             <h1>Make Payments</h1>
             <a href="http://localhost:8084/vault/login.html" data-icon="delete">Logout</a>
             <h1 align="center">Payments to Make</h1>
-        </div><!-- /header -->
+        </div>
+
         <table id="makeTable" class="tablesorter" align="center" border="2" cellpadding="2">
             <thead>
 

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
  *
  * @author David
  */
-public class ViewPayments extends AbstractController {
+public class ViewPaymentsController extends AbstractController {
  
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {

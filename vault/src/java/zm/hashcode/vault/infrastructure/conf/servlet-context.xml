@@ -22,12 +22,13 @@
     <bean name="/home.html" class="zm.hashcode.vault.client.mobile.springmvc.HomeController"/>
     <bean name="/login.html" class="zm.hashcode.vault.client.mobile.springmvc.LoginController"/>
     <bean name="/aboutus.html" class="zm.hashcode.vault.client.mobile.springmvc.AboutUsController"/>
+    <bean name="/balance.html" class="zm.hashcode.vault.client.mobile.springmvc.ViewBalanceController"/>
     <bean name="/main.html" class="zm.hashcode.vault.client.mobile.springmvc.MainController"/>
-    <bean name="/makepayment.html" class="zm.hashcode.vault.client.mobile.springmvc.ChangePinController"/>
-    <bean name="/makepayment.html" class="zm.hashcode.vault.client.mobile.springmvc.MakePayment"/>
-    <bean name="/userdetails.html" class="zm.hashcode.vault.client.mobile.springmvc.UserDetails"/>
-    <bean name="/viewpayments.html" class="zm.hashcode.vault.client.mobile.springmvc.ViewPayments"/>
-    <bean name="/balance.html" class="zm.hashcode.vault.client.mobile.springmvc.ViewBalance"/>
+    <bean name="/pin.html" class="zm.hashcode.vault.client.mobile.springmvc.ChangePinController"/>
+    <bean name="/makepayment.html" class="zm.hashcode.vault.client.mobile.springmvc.MakePaymentController"/>
+    <bean name="/userdetails.html" class="zm.hashcode.vault.client.mobile.springmvc.UserDetailsController"/>
+    <bean name="/viewpayments.html" class="zm.hashcode.vault.client.mobile.springmvc.ViewPaymentsController"/>
+    
         <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>

@@ -1,13 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <title>Pin</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-    <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
-    <script type="text/javascript" src="Jquery/tablesort.min.js"></script>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Pin</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+        <script type="text/javascript" src="Jquery/tablesort.min.js"></script>
 
-
+    </head>
     <body> 
         <div data-role="header">
             <a href="http://localhost:8084/vault/main.html" data-icon="back">Back</a>
@@ -16,10 +18,10 @@
         </div><!-- /header -->
         <div data-role="fieldcontain">
             <p align="center">   <label for="j_oldPassword">Old Password:</label>
-                <input type="text" name="j_username" id="j_username"/>
+                <input type="password" name="j_oldPassord" id="j_oldPassword"/>
                 <br/>
                 <label for="j_newPassword">New Password:</label>
-                <input type="password" name="j_password" id="j_password"/>
+                <input type="password" name="j_newPassword" id="j_newPassword"/>
             </p>
             <center><a data-role="button" data-theme="c" data-inline="true">Save Pin</a></center>
             <span id = "saveStatus"></span>
